@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextView.PoppinsNormal32spHeader">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextView.PoppinsNormal22spSubheader">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextView.PoppinsNormal16spBody">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="EditTextCustomStyle">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_marginHorizontal">30dp</item>
+        <item name="android:background">@drawable/rounded_border</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

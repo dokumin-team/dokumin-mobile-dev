@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Dokumin</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_fellas">Hello Fellas!</string>
+    <string name="let_s_login_to_your_account_first">Let’s login to your account first!</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="don_t_have_an_account">Don’t Have an Account ?</string>
+    <string name="register_here">Register here</string>
+    <string name="register">Register</string>
+    <string name="create_an_account_and_start_organizing_your_documents">Create an account and start organizing your documents!</string>
+    <string name="name">Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login_here">Login here</string>
 </resources>

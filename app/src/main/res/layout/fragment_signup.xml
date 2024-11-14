@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/alice_blue"
+    android:layout_marginTop="24dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textFontWeight="700"
+        android:layout_marginTop="100dp"
+        style="@style/TextView.PoppinsNormal32spHeader"/>
+
+    <TextView
+        style="@style/TextView.PoppinsNormal22spSubheader"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/create_an_account_and_start_organizing_your_documents" />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        style="@style/EditTextCustomStyle" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_address"
+        android:layout_marginTop="10dp"
+        style="@style/EditTextCustomStyle" />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        style="@style/EditTextCustomStyle" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/retype_password"
+        android:layout_marginTop="10dp"
+        style="@style/EditTextCustomStyle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/sign_up"
+        android:layout_marginTop="10dp"
+        app:cornerRadius="12dp"
+        android:backgroundTint="@color/ocean_blue" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_an_account" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_here"
+            android:textColor="@color/ocean_blue"
+            android:paddingStart="8dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
