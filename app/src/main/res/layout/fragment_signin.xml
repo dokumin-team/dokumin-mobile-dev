@@ -25,7 +25,7 @@
         android:text="@string/let_s_login_to_your_account_first" />
 
     <EditText
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_your_email"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         style="@style/EditTextCustomStyle" />
 
 

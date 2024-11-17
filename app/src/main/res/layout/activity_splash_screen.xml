@@ -3,8 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/alice_blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.splashscreen.SplashScreenActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="151dp"
+        android:layout_height="135dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.419"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dokumin"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.142"
+        tools:ignore="MissingConstraints"
+        android:fontFamily="@font/poppins_semibold"
+        android:letterSpacing="0.2"
+        android:textColor="@color/ocean_blue"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

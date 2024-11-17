@@ -18,4 +18,11 @@
     <string name="sign_up">Sign up</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login_here">Login here</string>
+    <string name="dokumin">Dokumin</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="code_just_sent_to_your_email">code just sent to your email</string>
+    <string name="verifiy">Verifiy</string>
+    <string name="titik">.</string>
+    <string name="didn_t_get_the_code">Didn’t get the code?</string>
+    <string name="resend_code_in_00_59">Resend code in 00:59</string>
 </resources>
