@@ -31,4 +31,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="document">Document</string>
     <string name="profile">Profile</string>
+    <string name="folder">Folder</string>
 </resources>
