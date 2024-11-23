@@ -12,17 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dokumin"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.welcome.WelcomeActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.WelcomeActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.WelcomeActivity1"
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="false"
