@@ -6,17 +6,101 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/avatarImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="152dp"
+        android:src="@drawable/ic_profile"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginTop="120dp" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextView.PoppinsNormal22spSubheader"
+        android:text="@string/nama_pengguna"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/avatarImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_marginHorizontal="12dp"
+        android:id="@+id/settingMenu"
+        style="@style/MenuItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/userName"
+        android:layout_marginTop="32dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:src="@drawable/baseline_settings_24"
+            android:contentDescription="@string/setting"
+            style="@style/MenuIconStyle" />
+
+        <TextView
+            android:id="@+id/settingText"
+            android:text="Setting"
+            style="@style/MenuTextStyle" />
+    </LinearLayout>
+
+    <View
+        style="@style/DividerStyle"
+        app:layout_constraintTop_toBottomOf="@id/settingMenu"
+        android:layout_marginTop="8dp"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:layout_marginHorizontal="12dp"
+        android:id="@+id/changeLayoutMenu"
+        style="@style/MenuItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/settingMenu"
+        android:layout_marginTop="8dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:src="@drawable/ic_key"
+            android:contentDescription="@string/change_password"
+            style="@style/MenuIconStyle" />
+
+        <TextView
+            android:id="@+id/changeLayoutText"
+            android:text="@string/change_password"
+            style="@style/MenuTextStyle" />
+    </LinearLayout>
+
+    <View
+        style="@style/DividerStyle"
+        app:layout_constraintTop_toBottomOf="@id/changeLayoutMenu"
+        android:layout_marginTop="8dp"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:layout_marginHorizontal="12dp"
+        android:id="@+id/logoutMenu"
+        style="@style/MenuItemStyle"
+        app:layout_constraintTop_toBottomOf="@id/changeLayoutMenu"
+        android:layout_marginTop="8dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:src="@drawable/ic_logout"
+            android:contentDescription="@string/logout"
+            style="@style/MenuIconStyle" />
+
+        <TextView
+            android:id="@+id/logoutText"
+            android:text="@string/logout"
+            style="@style/MenuTextStyle" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,4 +35,8 @@
     <string name="back_icon">Back</string>
     <string name="nama_document">nama document</string>
     <string name="dokumen_terbaru">Dokumen Terbaru</string>
+    <string name="nama_pengguna">Nama Pengguna</string>
+    <string name="setting">setting</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">logout</string>
 </resources>
