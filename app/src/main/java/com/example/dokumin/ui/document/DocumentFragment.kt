@@ -4,35 +4,38 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.dokumin.R
+import com.example.dokumin.adapter.FileAdapter
+import com.example.dokumin.data.file.FileItem
 import com.example.dokumin.databinding.FragmentDocumentBinding
 
 class DocumentFragment : Fragment() {
 
     private var _binding: FragmentDocumentBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val view = inflater.inflate(R.layout.fragment_document, container, false)
 
-        _binding = FragmentDocumentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val sampleData = listOf(
+            FileItem("Document 1", R.drawable.docs),
+            FileItem("Document 2", R.drawable.docs),
+            FileItem("Document 3", R.drawable.docs),
+            FileItem("Document 4", R.drawable.docs),
+            FileItem("Document 5", R.drawable.docs)
+        )
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_document)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = FileAdapter(sampleData)
+
+        return view
     }
 
     override fun onDestroyView() {

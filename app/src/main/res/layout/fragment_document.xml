@@ -6,17 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".ui.document.DocumentFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="match_parent"
+    <SearchView
+        android:id="@+id/search_view_upcoming"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:iconifiedByDefault="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@android:color/white"
+        app:searchIcon="@drawable/ic_search"
+        android:queryHint="Search Documents..."
+        android:background="@drawable/searchview_bg"
+        android:textColorHint="@android:color/darker_gray" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_document"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/search_view_upcoming"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/item_document" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
