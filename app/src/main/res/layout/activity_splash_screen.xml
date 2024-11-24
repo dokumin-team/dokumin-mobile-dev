@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/alice_blue"
+    android:background="@color/ocean_blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.splashscreen.SplashScreenActivity">
@@ -35,5 +35,5 @@
         tools:ignore="MissingConstraints"
         android:fontFamily="@font/poppins_semibold"
         android:letterSpacing="0.2"
-        android:textColor="@color/ocean_blue"/>
+        android:textColor="@color/alice_blue"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
