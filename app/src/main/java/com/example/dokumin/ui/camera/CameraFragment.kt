@@ -69,10 +69,14 @@ class CameraFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CAMERA_REQUEST_CODE) {
-                val imageUri: Uri? = data?.data
-            } else if (requestCode == GALLERY_REQUEST_CODE) {
-                val imageUri: Uri? = data?.data
+            val imageUri: Uri? = data?.data
+
+            if (requestCode == CAMERA_REQUEST_CODE || requestCode == GALLERY_REQUEST_CODE) {
+                imageUri?.let {
+                    val intent = Intent(requireContext(), ImagePreviewActivity::class.java)
+                    intent.putExtra("imageUri", it)
+                    startActivity(intent)
+                }
             }
         }
     }

@@ -49,4 +49,5 @@
     <string name="camera">camera</string>
     <string name="pilih_metode_pengambilan_gambar">Pilih Metode Pengambilan Gambar</string>
     <string name="gallery">gallery</string>
+    <string name="image_preview">Image Preview</string>
 </resources>
