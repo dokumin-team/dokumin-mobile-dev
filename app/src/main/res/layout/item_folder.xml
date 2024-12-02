@@ -32,8 +32,6 @@
             android:textColor="@color/ocean_blue"
             android:fontFamily="@font/poppins_medium"
             android:layout_marginTop="8dp" />
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

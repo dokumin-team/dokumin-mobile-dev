@@ -30,11 +30,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_folder
             )
         )
-        // Hapus setupActionBarWithNavController
         navView.setupWithNavController(navController)
     }
 
-    // Anda bisa menghapus metode ini jika tidak diperlukan
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         return navController.navigateUp() || super.onSupportNavigateUp()

@@ -10,8 +10,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Dokumin"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.auth.signup.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.signin.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.otp.OtpActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.welcome.WelcomeActivity3"
             android:exported="false" />
@@ -22,9 +31,8 @@
             android:name=".ui.welcome.WelcomeActivity1"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_main">
+            android:name=".ui.splashscreen.SplashScreenActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,9 +40,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.splashscreen.SplashScreenActivity"
+            android:name=".ui.MainActivity"
             android:exported="false"
-            android:label="@string/app_name" />
+            android:label="@string/title_activity_main" />
     </application>
 
 </manifest>

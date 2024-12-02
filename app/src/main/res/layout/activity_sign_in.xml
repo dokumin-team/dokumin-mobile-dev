@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_fellas"
         android:textFontWeight="700"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="170dp"
         style="@style/TextView.PoppinsNormal32spHeader"/>
 
     <TextView
@@ -73,11 +73,14 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/signInBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:text="@string/sign_in"
+        style="@style/ShapeAppearanceOverlay.Material3.Button"
         app:cornerRadius="12dp"
+        android:layout_marginTop="25dp"
         android:backgroundTint="@color/ocean_blue" />
 
     <LinearLayout
@@ -85,7 +88,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="160dp">
+        android:layout_marginTop="120dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,11 +96,12 @@
             android:text="@string/don_t_have_an_account" />
 
         <TextView
+            android:id="@+id/registerNowBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register_here"
             android:textColor="@color/ocean_blue"
-        android:paddingStart="8dp"/>
+            android:paddingStart="8dp"/>
     </LinearLayout>
 
 

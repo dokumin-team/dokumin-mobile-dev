@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.welcome.WelcomeActivity1"/>
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_vertical"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="348dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/illus1" />
+
+    <TextView
+        style="@style/TextView.PoppinsNormal32spHeader"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/selamat_datang_di_dokumin"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/ocean_blue"
+        android:textFontWeight="900" />
+
+    <TextView
+        style="@style/TextView.PoppinsNormal22spSubheader"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/dokumin_hadir_untuk_membantu_anda_mengorganisir_dokumen_yang_difoto_agar_lebih_rapi_dan_mudah_diakses_tidak_lagi_khawatir_dokumen_tenggelam_di_antara_foto_foto_di_galeri_anda"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/ocean_blue"
+        android:text="next"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center" />
+
+</LinearLayout>

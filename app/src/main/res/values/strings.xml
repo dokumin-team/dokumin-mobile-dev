@@ -39,4 +39,11 @@
     <string name="setting">setting</string>
     <string name="change_password">Change Password</string>
     <string name="logout">logout</string>
+    <string name="selamat_datang_di_dokumin">Selamat Datang di Dokumin</string>
+    <string name="dokumin_hadir_untuk_membantu_anda_mengorganisir_dokumen_yang_difoto_agar_lebih_rapi_dan_mudah_diakses_tidak_lagi_khawatir_dokumen_tenggelam_di_antara_foto_foto_di_galeri_anda">Dokumin hadir untuk membantu Anda mengorganisir dokumen yang difoto agar lebih rapi dan mudah diakses. Tidak lagi khawatir dokumen tenggelam di antara foto-foto di galeri Anda!</string>
+    <string name="organisir_dokumen_dengan_mudah">Organisir Dokumen dengan Mudah</string>
+    <string name="dengan_dokumin_anda_bisa_dengan_mudah_mengelompokkan_dan_menyimpan_dokumen_anda_berdasarkan_kategori_sehingga_dokumen_penting_selalu_terjaga_dan_mudah_ditemukan_kapan_saja">Dengan Dokumin, Anda bisa dengan mudah mengelompokkan dan menyimpan dokumen Anda berdasarkan kategori, sehingga dokumen penting selalu terjaga dan mudah ditemukan kapan saja.</string>
+    <string name="akses_cepat_tanpa_hambatan">Akses Cepat, Tanpa Hambatan</string>
+    <string name="tidak_perlu_lagi_membuang_waktu_mencari_dokumen_dockeeper_memungkinkan_anda_mengakses_dokumen_dengan_cepat_dan_praktis_hanya_dengan_beberapa_klik">Tidak perlu lagi membuang waktu mencari dokumen. DocKeeper memungkinkan Anda mengakses dokumen dengan cepat dan praktis hanya dengan beberapa klik.</string>
+    <string name="next">next</string>
 </resources>

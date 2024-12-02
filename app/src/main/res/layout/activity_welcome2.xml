@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.welcome.WelcomeActivity2">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_vertical"
+    android:background="@android:color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="348dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/illus2" />
+
+    <TextView
+        style="@style/TextView.PoppinsNormal32spHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/organisir_dokumen_dengan_mudah"
+        android:textFontWeight="900"
+        android:textColor="@color/ocean_blue"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        style="@style/TextView.PoppinsNormal22spSubheader"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/dengan_dokumin_anda_bisa_dengan_mudah_mengelompokkan_dan_menyimpan_dokumen_anda_berdasarkan_kategori_sehingga_dokumen_penting_selalu_terjaga_dan_mudah_ditemukan_kapan_saja"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/ocean_blue"
+        android:text="next"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center" />
+
+</LinearLayout>
