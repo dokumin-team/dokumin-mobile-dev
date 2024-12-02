@@ -6,10 +6,16 @@
         android:icon="@drawable/ic_home_black"
         android:title="@string/title_home" />
 
+
     <item
         android:id="@+id/navigation_document"
         android:icon="@drawable/ic_docs_black"
         android:title="@string/document" />
+
+    <item
+        android:id="@+id/navigation_camera"
+        android:icon="@drawable/ic_camera_black"
+        android:title="@string/camera" />
 
     <item
         android:id="@+id/navigation_folder"
@@ -20,5 +26,4 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile_black"
         android:title="@string/profile" />
-
 </menu>

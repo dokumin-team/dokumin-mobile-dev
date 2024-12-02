@@ -46,4 +46,7 @@
     <string name="akses_cepat_tanpa_hambatan">Akses Cepat, Tanpa Hambatan</string>
     <string name="tidak_perlu_lagi_membuang_waktu_mencari_dokumen_dockeeper_memungkinkan_anda_mengakses_dokumen_dengan_cepat_dan_praktis_hanya_dengan_beberapa_klik">Tidak perlu lagi membuang waktu mencari dokumen. DocKeeper memungkinkan Anda mengakses dokumen dengan cepat dan praktis hanya dengan beberapa klik.</string>
     <string name="next">next</string>
+    <string name="camera">camera</string>
+    <string name="pilih_metode_pengambilan_gambar">Pilih Metode Pengambilan Gambar</string>
+    <string name="gallery">gallery</string>
 </resources>
