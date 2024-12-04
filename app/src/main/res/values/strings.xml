@@ -50,4 +50,6 @@
     <string name="pilih_metode_pengambilan_gambar">Pilih Metode Pengambilan Gambar</string>
     <string name="gallery">gallery</string>
     <string name="image_preview">Image Preview</string>
+    <string name="search">Search...</string>
+    <string name="dokumen">Dokumen</string>
 </resources>

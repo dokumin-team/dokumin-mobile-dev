@@ -12,6 +12,12 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="TextView.PoppinsBold22spSubheader">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="TextView.PoppinsNormal16spBody">
         <item name="android:fontFamily">@font/poppins_regular</item>
         <item name="android:textColor">@color/black</item>

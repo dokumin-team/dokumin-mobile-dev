@@ -15,6 +15,8 @@ class FileAdapter(private val fileList: List<FileItem>) :
     inner class FileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val fileName: TextView = itemView.findViewById(R.id.fileTextView)
         val fileImage: ImageView = itemView.findViewById(R.id.img_item_photo_finish)
+        val fileDate: TextView = itemView.findViewById(R.id.dateTextView)
+        val fileTime: TextView = itemView.findViewById(R.id.timeTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder {
@@ -26,9 +28,9 @@ class FileAdapter(private val fileList: List<FileItem>) :
         val currentItem = fileList[position]
         holder.fileName.text = currentItem.fileName
         holder.fileImage.setImageResource(currentItem.imageResId)
+        holder.fileDate.text = currentItem.date
+        holder.fileTime.text = currentItem.time
     }
 
     override fun getItemCount() = fileList.size
 }
-
-

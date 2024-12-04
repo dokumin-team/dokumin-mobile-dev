@@ -17,25 +17,77 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
+            android:src="@drawable/docs"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:ignore="ImageContrastCheck"
             tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/documentTextView"
+        <TableLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toEndOf="@id/img_item_photo_docs"
-            android:textSize="16sp"
-            android:textStyle="bold"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/img_item_photo_docs"
-            card_view:layout_constraintTop_toTopOf="@+id/img_item_photo_docs"
-            tools:text="@string/nama_document" />
+            card_view:layout_constraintStart_toEndOf="@id/img_item_photo_docs"
+            android:orientation="horizontal"
+            card_view:layout_constraintTop_toTopOf="@id/img_item_photo_docs">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/documentTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/ocean_blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="@string/nama_document" />
+
+                <ImageView
+                    android:id="@+id/moreIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_more_square" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_marginTop="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@id/img_item_photo_docs"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14sp"
+                android:textColor="@color/ocean_blue"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/img_item_photo_docs"
+                card_view:layout_constraintTop_toBottomOf="@id/fileTextView"
+                tools:text="12 Dec 2024" />
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@id/img_item_photo_docs"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="12sp"
+                android:textColor="@color/ocean_blue"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/img_item_photo_docs"
+                card_view:layout_constraintTop_toBottomOf="@id/dateTextView"
+                tools:text="10:30 AM" />
+        </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
