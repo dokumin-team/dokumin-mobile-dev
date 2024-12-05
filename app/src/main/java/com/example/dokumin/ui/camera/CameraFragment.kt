@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.dokumin.R
 import android.provider.MediaStore
 import android.content.pm.PackageManager
+import android.widget.ImageView
 
 class CameraFragment : Fragment() {
 
@@ -31,8 +32,9 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cameraBtn = view.findViewById<LinearLayout>(R.id.cameraBtn)
-        val galleryBtn = view.findViewById<LinearLayout>(R.id.galleryBtn)
+        val cameraBtn = view.findViewById<ImageView>(R.id.cameraBtn)
+        val galleryBtn = view.findViewById<ImageView>(R.id.galleryBtn)
+
 
         checkPermissions()
 

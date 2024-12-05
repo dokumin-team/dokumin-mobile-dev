@@ -14,7 +14,7 @@ class FolderAdapter(private val folderList: List<FolderItem>) :
     RecyclerView.Adapter<FolderAdapter.FolderViewHolder>() {
 
     inner class FolderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val folderImage: ImageView = itemView.findViewById(R.id.img_flower)
+        val folderImage: ImageView = itemView.findViewById(R.id.img_folder)
         val folderName: TextView = itemView.findViewById(R.id.tv_folder_name)
     }
 

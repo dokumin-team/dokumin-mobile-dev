@@ -34,7 +34,7 @@ class FolderFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.FolderList)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = FolderAdapter(folderList)
+
     }
 }

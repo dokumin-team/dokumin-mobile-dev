@@ -52,4 +52,7 @@
     <string name="image_preview">Image Preview</string>
     <string name="search">Search...</string>
     <string name="dokumen">Dokumen</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
+    <string name="about">About</string>
+    <string name="contact_us">Contact Us</string>
 </resources>
