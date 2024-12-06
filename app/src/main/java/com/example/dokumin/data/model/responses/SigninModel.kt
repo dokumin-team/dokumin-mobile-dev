@@ -1,12 +1,15 @@
 package com.example.dokumin.data.model.responses
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class SigninModel(
-    var error: Boolean?,
+    var `data`: Data?,
     var message: String?,
-    var success: Boolean?,
+    var status: String?,
     var token: String?
-) : Parcelable
+)
+
+data class Data(
+    var email: String?,
+    var id: String?,
+    var name: String?,
+    var verified: Boolean?
+)

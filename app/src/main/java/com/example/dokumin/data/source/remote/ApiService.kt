@@ -6,6 +6,7 @@ import com.example.dokumin.data.model.responses.SignupModel
 import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.requests.VerifyOtpRequest
 import com.example.dokumin.data.model.responses.SigninModel
+import com.example.dokumin.data.model.responses.VerifyOtpModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -23,12 +24,12 @@ interface ApiService {
     @POST("userOTPVerifications/verify")
     fun verifyOtp(
         @Body otp: VerifyOtpRequest
-    ) :Call<SignupModel?>
+    ) :Call<VerifyOtpModel?>
 
     @POST("userOTPVerifications/resend")
     fun resendOtp(
         @Body email: ResendOtpRequest
-    ):Call<SignupModel?>
+    ):Call<VerifyOtpModel?>
 
 
 }

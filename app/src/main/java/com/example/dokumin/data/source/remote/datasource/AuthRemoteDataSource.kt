@@ -6,6 +6,7 @@ import com.example.dokumin.data.model.responses.SignupModel
 import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.requests.VerifyOtpRequest
 import com.example.dokumin.data.model.responses.SigninModel
+import com.example.dokumin.data.model.responses.VerifyOtpModel
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,13 +58,13 @@ object AuthRemoteDataSource {
     // Send OTP
     fun doVerifyOtp(
         otp: String,
-        onResult: (Result<SignupModel?>) -> Unit
+        onResult: (Result<VerifyOtpModel?>) -> Unit
     ) {
         val call = RetrofitConfig.ApiService.verifyOtp(
             VerifyOtpRequest(otp)
         )
-        call.enqueue(object : Callback<SignupModel?> {
-            override fun onResponse(call: Call<SignupModel?>, response: Response<SignupModel?>) {
+        call.enqueue(object : Callback<VerifyOtpModel?> {
+            override fun onResponse(call: Call<VerifyOtpModel?>, response: Response<VerifyOtpModel?>) {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
@@ -71,7 +72,7 @@ object AuthRemoteDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<SignupModel?>, t: Throwable) {
+            override fun onFailure(call: Call<VerifyOtpModel?>, t: Throwable) {
                 onResult(Result.failure(t))
             }
         })
@@ -81,13 +82,13 @@ object AuthRemoteDataSource {
     // Resend OTP
     fun doResendOtp(
         email: String,
-        onResult: (Result<SignupModel?>) -> Unit
+        onResult: (Result<VerifyOtpModel?>) -> Unit
     ) {
         val call = RetrofitConfig.ApiService.resendOtp(
             ResendOtpRequest(email)
         )
-        call.enqueue(object : Callback<SignupModel?> {
-            override fun onResponse(call: Call<SignupModel?>, response: Response<SignupModel?>) {
+        call.enqueue(object : Callback<VerifyOtpModel?> {
+            override fun onResponse(call: Call<VerifyOtpModel?>, response: Response<VerifyOtpModel?>) {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
@@ -95,7 +96,7 @@ object AuthRemoteDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<SignupModel?>, t: Throwable) {
+            override fun onFailure(call: Call<VerifyOtpModel?>, t: Throwable) {
                 onResult(Result.failure(t))
             }
         })
