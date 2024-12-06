@@ -3,11 +3,8 @@ package com.example.dokumin.ui.splashscreen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import com.example.dokumin.R
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.data.source.remote.RetrofitConfig
@@ -17,9 +14,9 @@ import com.example.dokumin.ui.welcome.WelcomeActivity1
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
-    private val userPreferences by lazy { AppPreferences(this) }
-    private val userToken by lazy { userPreferences.getSession() }
-    private val isFirstRun by lazy { userPreferences.isFirstRun() }
+    private val appPreferences by lazy { AppPreferences(this) }
+    private val userToken by lazy { appPreferences.getSession() }
+    private val isFirstRun by lazy { appPreferences.isFirstRun() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +29,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun checkFirstRun() {
         if (isFirstRun) {
-            userPreferences.updateFirstRun()
+            appPreferences.updateFirstRun()
             val intent = Intent(this, WelcomeActivity1::class.java)
             startActivity(intent)
         } else {

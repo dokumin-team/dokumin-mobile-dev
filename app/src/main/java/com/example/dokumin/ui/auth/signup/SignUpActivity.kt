@@ -70,6 +70,12 @@ class SignUpActivity : AppCompatActivity() {
                 // show error message
             }
         }
+
+        errorMessage.observe(this) {
+            if (it != null) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun validateInput(): Boolean {
