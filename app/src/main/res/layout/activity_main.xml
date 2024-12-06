@@ -22,9 +22,11 @@
     <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
+        app:itemActiveIndicatorStyle="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/alice_blue"
+        android:background="@color/ocean_blue"
+        app:labelVisibilityMode="unlabeled"
         app:itemIconTint="@drawable/bottom_nav_item_icon_color"
         app:itemTextColor="@drawable/bottom_nav_item_icon_color"
         app:layout_constraintBottom_toBottomOf="parent"

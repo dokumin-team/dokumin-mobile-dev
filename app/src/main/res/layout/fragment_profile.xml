@@ -34,7 +34,6 @@
         app:layout_constraintStart_toStartOf="@id/avatarImage"
         app:layout_constraintTop_toBottomOf="@id/avatarImage" />
 
-    <!-- Garis pemisah atas untuk setting menu -->
     <View
         style="@style/DividerStyle"
         app:layout_constraintTop_toBottomOf="@id/userName"
@@ -42,8 +41,8 @@
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/FaqMenu"
         android:layout_marginHorizontal="12dp"
-        android:id="@+id/settingMenu"
         style="@style/MenuItemStyle"
         app:layout_constraintTop_toBottomOf="@id/userName"
         android:layout_marginTop="32dp"
@@ -59,18 +58,17 @@
             style="@style/MenuTextStyle" />
     </LinearLayout>
 
-    <!-- Garis pemisah bawah untuk setting menu -->
     <View
         style="@style/DividerStyle"
-        app:layout_constraintTop_toBottomOf="@id/settingMenu"
+        app:layout_constraintTop_toBottomOf="@id/FaqMenu"
         android:layout_marginTop="8dp"
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/AboutMenu"
         android:layout_marginHorizontal="12dp"
-        android:id="@+id/changeLayoutMenu"
         style="@style/MenuItemStyle"
-        app:layout_constraintTop_toBottomOf="@id/settingMenu"
+        app:layout_constraintTop_toBottomOf="@id/FaqMenu"
         android:layout_marginTop="8dp"
         tools:ignore="MissingConstraints">
 
@@ -84,18 +82,17 @@
             android:text="@string/about" />
     </LinearLayout>
 
-    <!-- Garis pemisah bawah untuk change layout menu -->
     <View
         style="@style/DividerStyle"
-        app:layout_constraintTop_toBottomOf="@id/changeLayoutMenu"
+        app:layout_constraintTop_toBottomOf="@id/AboutMenu"
         android:layout_marginTop="8dp"
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/ContactUsMenu"
         android:layout_marginHorizontal="12dp"
-        android:id="@+id/logoutMenu"
         style="@style/MenuItemStyle"
-        app:layout_constraintTop_toBottomOf="@id/changeLayoutMenu"
+        app:layout_constraintTop_toBottomOf="@id/AboutMenu"
         android:layout_marginTop="8dp"
         tools:ignore="MissingConstraints">
 
@@ -109,10 +106,9 @@
             style="@style/MenuTextStyle" />
     </LinearLayout>
 
-    <!-- Garis pemisah bawah untuk logout menu -->
     <View
         style="@style/DividerStyle"
-        app:layout_constraintTop_toBottomOf="@id/logoutMenu"
+        app:layout_constraintTop_toBottomOf="@id/ContactUsMenu"
         android:layout_marginTop="8dp"
         tools:ignore="MissingConstraints" />
 
@@ -120,7 +116,7 @@
         android:id="@+id/logoutButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/ocean_blue"
         app:icon="@drawable/ic_logout"
@@ -128,7 +124,7 @@
         app:iconPadding="8dp"
         android:gravity="center"
         app:cornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@id/logoutMenu"
+        app:layout_constraintTop_toBottomOf="@id/ContactUsMenu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

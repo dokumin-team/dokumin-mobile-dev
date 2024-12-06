@@ -55,4 +55,9 @@
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
     <string name="about">About</string>
     <string name="contact_us">Contact Us</string>
+    <string name="what_is_dokumin">What is Dokumin ?</string>
+    <string name="how_to_use_dokumin">How to use Dokumin ?</string>
+    <string name="how_to_scan_qr_code">How to Scan QR code ?</string>
+    <string name="how_to_scan_documents">How to scan documents?</string>
+    <string name="dokumin_is_a_document_management_app_that_makes_it_easy_for_users_to_organize_store_and_access_various_types_of_documents_efficiently_the_app_not_only_allows_users_to_store_documents_in_different_formats_but_also_features_a_smart_search_system_to_help_find_documents_quickly_additionally_dokumin_comes_with_a_reminder_system_that_notifies_users_when_important_documents_need_to_be_renewed_thanks_to_the_integrated_artificial_intelligence_ai_this_ai_also_enables_users_to_take_a_photo_of_documents_automatically_detect_them_and_categorize_them_into_the_appropriate_folders_making_document_management_more_practical_organized_and_efficient">Dokumin is a document management app that makes it easy for users to organize, store, and access various types of documents efficiently. The app not only allows users to store documents in different formats but also features a smart search system to help find documents quickly. Additionally, Dokumin comes with a reminder system that notifies users when important documents need to be renewed, thanks to the integrated artificial intelligence (AI). This AI also enables users to take a photo of documents, automatically detect them, and categorize them into the appropriate folders, making document management more practical, organized, and efficient.</string>
 </resources>

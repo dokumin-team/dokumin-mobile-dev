@@ -10,7 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dokumin.R
+import com.example.dokumin.adapter.FileAdapter
 import com.example.dokumin.data.file.FileItem
 
 class HomeFragment : Fragment() {
@@ -50,9 +53,9 @@ class HomeFragment : Fragment() {
             FileItem("Document 3", R.drawable.docs),
         )
 
-//        val recyclerView = root.findViewById<RecyclerView>(R.id.FileList)
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        recyclerView.adapter = FileAdapter(sampleData)
+        val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = FileAdapter(sampleData)
 
         return root
     }

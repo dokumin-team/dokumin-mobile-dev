@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.dokumin.R
 import com.example.dokumin.ui.MainActivity
+import com.example.dokumin.ui.auth.otp.OtpActivity
 import com.example.dokumin.ui.auth.signup.SignUpActivity
 
 class SignInActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.signInBtn).setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, OtpActivity::class.java)
             startActivity(intent)
         }
     }

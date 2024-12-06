@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/dokumen"
         android:textFontWeight="700"
-        android:textSize="22sp"
+        android:textSize="35sp"
         android:gravity="center"
         android:textColor="@color/ocean_blue"
         android:fontFamily="@font/poppins_extrabold"
