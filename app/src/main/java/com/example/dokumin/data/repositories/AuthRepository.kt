@@ -7,6 +7,7 @@ import com.example.dokumin.data.model.requests.SignInRequest
 import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.responses.SigninModel
 import com.example.dokumin.data.model.responses.SignupModel
+import com.example.dokumin.data.model.responses.VerifyOtpModel
 import com.example.dokumin.data.source.remote.datasource.AuthRemoteDataSource
 
 object AuthRepository {
@@ -49,8 +50,8 @@ object AuthRepository {
     }
 
     // TODO CHANGE MODEL
-    private val _verifyOtpResponse: MutableLiveData<SignupModel?> = MutableLiveData()
-    val verifyOtpResponse: LiveData<SignupModel?> = _verifyOtpResponse
+    private val _verifyOtpResponse: MutableLiveData<VerifyOtpModel?> = MutableLiveData()
+    val verifyOtpResponse: LiveData<VerifyOtpModel?> = _verifyOtpResponse
     fun verifyOtp(otp: String) {
         // Call API
         AuthRemoteDataSource.doVerifyOtp(
@@ -65,8 +66,8 @@ object AuthRepository {
     }
 
     // TODO CHANGE MODEL
-    private val _resendOtpResponse: MutableLiveData<SignupModel?> = MutableLiveData()
-    val resendOtpResponse: LiveData<SignupModel?> = _resendOtpResponse
+    private val _resendOtpResponse: MutableLiveData<VerifyOtpModel?> = MutableLiveData()
+    val resendOtpResponse: LiveData<VerifyOtpModel?> = _resendOtpResponse
     fun resendOtp(email: String) {
         // Call API
         AuthRemoteDataSource.doResendOtp(
