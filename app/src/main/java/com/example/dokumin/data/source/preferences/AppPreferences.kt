@@ -29,11 +29,11 @@ class AppPreferences(val mContext: Context) {
         }
     }
 
-    fun isFirstTime(): Boolean {
+    fun isFirstRun(): Boolean {
         return preferences.getBoolean(isFirst.toString(), true)
     }
 
-    fun updateFirstTime() {
+    fun updateFirstRun() {
         editor.apply {
             putBoolean(isFirst.toString(), false)
             apply()

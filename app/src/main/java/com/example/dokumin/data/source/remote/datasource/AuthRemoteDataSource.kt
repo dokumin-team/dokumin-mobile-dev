@@ -61,6 +61,7 @@ object AuthRemoteDataSource {
         onResult: (Result<VerifyOtpModel?>) -> Unit
     ) {
         val call = RetrofitConfig.ApiService.verifyOtp(
+            "Bearer ${RetrofitConfig.token}",
             VerifyOtpRequest(otp)
         )
         call.enqueue(object : Callback<VerifyOtpModel?> {
@@ -85,6 +86,7 @@ object AuthRemoteDataSource {
         onResult: (Result<VerifyOtpModel?>) -> Unit
     ) {
         val call = RetrofitConfig.ApiService.resendOtp(
+            "Bearer ${RetrofitConfig.token}",
             ResendOtpRequest(email)
         )
         call.enqueue(object : Callback<VerifyOtpModel?> {

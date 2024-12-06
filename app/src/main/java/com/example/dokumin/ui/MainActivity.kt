@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dokumin.R
+import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

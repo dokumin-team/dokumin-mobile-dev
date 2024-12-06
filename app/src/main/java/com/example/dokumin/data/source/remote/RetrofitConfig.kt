@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitConfig {
+    var token: String = ""
     private const val BASE_URL = "https://dokumin-api-834388728750.asia-southeast2.run.app/"
     private val Client by lazy {
         OkHttpClient.Builder()
