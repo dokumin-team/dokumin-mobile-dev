@@ -5,6 +5,7 @@ import com.example.dokumin.data.model.requests.SignInRequest
 import com.example.dokumin.data.model.responses.SignupModel
 import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.requests.VerifyOtpRequest
+import com.example.dokumin.data.model.responses.SigninModel
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,11 +36,11 @@ object AuthRemoteDataSource {
     // Login
     fun doSignIn(
         loginRequest: SignInRequest,
-        onResult: (Result<SignupModel?>) -> Unit
+        onResult: (Result<SigninModel?>) -> Unit
     ) {
         val call = RetrofitConfig.ApiService.signInUser(loginRequest)
-        call.enqueue(object : Callback<SignupModel?> {
-            override fun onResponse(call: Call<SignupModel?>, response: Response<SignupModel?>) {
+        call.enqueue(object : Callback<SigninModel?> {
+            override fun onResponse(call: Call<SigninModel?>, response: Response<SigninModel?>) {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
@@ -47,7 +48,7 @@ object AuthRemoteDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<SignupModel?>, t: Throwable) {
+            override fun onFailure(call: Call<SigninModel?>, t: Throwable) {
                 onResult(Result.failure(t))
             }
         })
