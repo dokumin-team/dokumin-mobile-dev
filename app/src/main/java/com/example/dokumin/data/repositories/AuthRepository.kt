@@ -12,6 +12,8 @@ import com.example.dokumin.data.source.remote.datasource.AuthRemoteDataSource
 
 object AuthRepository {
 
+    var email: String = ""
+
     // Error message
     private val _errorMessage: MutableLiveData<String?> = MutableLiveData()
     val errorMessage: LiveData<String?> = _errorMessage

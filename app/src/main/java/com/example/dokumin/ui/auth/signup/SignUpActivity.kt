@@ -39,6 +39,7 @@ class SignUpActivity : AppCompatActivity() {
                 val name = etName.text.toString()
                 
                 // call the API
+                AuthRepository.email = email
                 AuthRepository.signUp(email, password, name)
 
             }

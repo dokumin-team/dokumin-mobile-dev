@@ -39,6 +39,7 @@
         android:gravity="center_horizontal">
 
         <EditText
+            android:id="@+id/etOtp1"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="3dp"
@@ -47,6 +48,7 @@
             android:gravity="center"/>
 
         <EditText
+            android:id="@+id/etOtp2"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="3dp"
@@ -56,6 +58,7 @@
             />
 
         <EditText
+            android:id="@+id/etOtp3"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="3dp"
@@ -64,6 +67,7 @@
             android:gravity="center"/>
 
         <EditText
+            android:id="@+id/etOtp4"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="3dp"
@@ -71,13 +75,13 @@
             android:hint="@string/titik"
             android:gravity="center"/>
 
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="3dp"
-            style="@style/EditTextCustomStyle"
-            android:hint="@string/titik"
-            android:gravity="center"/>
+<!--        <EditText-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_margin="3dp"-->
+<!--            style="@style/EditTextCustomStyle"-->
+<!--            android:hint="@string/titik"-->
+<!--            android:gravity="center"/>-->
 
     </LinearLayout>
 
@@ -94,9 +98,10 @@
             android:text="@string/didn_t_get_the_code" />
 
         <TextView
+            android:id="@+id/resendCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/resend_code_in_00_59"
+            android:text=""
             android:textColor="@color/ocean_blue"
             android:paddingStart="8dp"/>
     </LinearLayout>
