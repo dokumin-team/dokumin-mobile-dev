@@ -28,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         // validate the field
         binding?.apply {
             btnSignUp.setOnClickListener {
-                
+
                 val isValid = validateInput()
                 if (!isValid) {
                     // show error
@@ -37,10 +37,10 @@ class SignUpActivity : AppCompatActivity() {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
                 val name = etName.text.toString()
-                
+
                 // call the API
                 AuthRepository.email = email
-                AuthRepository.signUp(email, password, name)
+                AuthRepository.signUp(email = email, name = name, password = password)
 
             }
             loginTextBtn.setOnClickListener {
@@ -53,9 +53,9 @@ class SignUpActivity : AppCompatActivity() {
         observeSignUpResponse()
     }
 
-    private fun observeSignUpResponse(){
-        AuthRepository.signUpResponse.observe(this@SignUpActivity){
-            if (it != null){
+    private fun observeSignUpResponse() {
+        AuthRepository.signUpResponse.observe(this@SignUpActivity) {
+            if (it != null) {
                 // show success message
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 // retrieve token
