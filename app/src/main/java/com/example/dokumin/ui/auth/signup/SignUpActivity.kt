@@ -17,12 +17,14 @@ import com.example.dokumin.databinding.ActivityMainBinding
 import com.example.dokumin.databinding.ActivitySignUpBinding
 import com.example.dokumin.ui.auth.otp.OtpActivity
 import com.example.dokumin.ui.auth.signin.SignInActivity
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class SignUpActivity : AppCompatActivity() {
     private var binding: ActivitySignUpBinding? = null
     private val appPreferences by lazy {
         AppPreferences(this@SignUpActivity)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -61,7 +63,13 @@ class SignUpActivity : AppCompatActivity() {
         AuthRepository.signUpResponse.observe(this@SignUpActivity) {
             if (it != null) {
                 // show success message
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(
+                    this,
+                    it.message,
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    true
+                );
                 // retrieve token
                 val token = it.token
                 RetrofitConfig.token = token.toString()
@@ -70,17 +78,18 @@ class SignUpActivity : AppCompatActivity() {
                 // navigate to otp screen
                 val intent = Intent(this, OtpActivity::class.java)
                 startActivity(intent)
-            } else {
-                // show error message
-                val errorMessage = AuthRepository.errorMessage.value
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                // show error message
             }
         }
 
         errorMessage.observe(this) {
             if (it != null) {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(
+                    this,
+                    it,
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    true
+                );
             }
         }
     }

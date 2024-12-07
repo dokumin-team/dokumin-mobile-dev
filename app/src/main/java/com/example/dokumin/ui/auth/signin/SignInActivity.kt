@@ -17,12 +17,14 @@ import com.example.dokumin.databinding.ActivitySignInBinding
 import com.example.dokumin.ui.MainActivity
 import com.example.dokumin.ui.auth.otp.OtpActivity
 import com.example.dokumin.ui.auth.signup.SignUpActivity
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class SignInActivity : AppCompatActivity() {
-    private var binding : ActivitySignInBinding? = null
+    private var binding: ActivitySignInBinding? = null
     private val appPreferences by lazy {
         AppPreferences(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -54,7 +56,13 @@ class SignInActivity : AppCompatActivity() {
         AuthRepository.signInResponse.observe(this@SignInActivity) {
             if (it != null) {
                 // show success message
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(
+                    this,
+                    it.message,
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    true
+                );
 
                 // retrieve and save token
                 val token = it.token
@@ -67,18 +75,19 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-
-//                val intent = Intent(this@SignInActivity, MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
             }
         }
 
         AuthRepository.errorMessage.observe(this) {
             if (it != null) {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-
-                if (it == "Email has not been verified yet. Check your inbox!"){
+                FancyToast.makeText(
+                    this,
+                    it,
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    true
+                );
+                if (it == "Email has not been verified yet. Check your inbox!") {
                     // save email to AuthRepository
                     AuthRepository.email = binding?.etEmail?.text.toString()
                     RetrofitConfig.token = appPreferences.getSession()

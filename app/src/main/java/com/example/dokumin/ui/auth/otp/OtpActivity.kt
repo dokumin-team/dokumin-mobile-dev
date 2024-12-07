@@ -15,6 +15,7 @@ import com.example.dokumin.databinding.ActivityOtpBinding
 import com.example.dokumin.databinding.ActivitySignInBinding
 import com.example.dokumin.ui.MainActivity
 import com.example.dokumin.ui.auth.signin.SignInActivity
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class OtpActivity : AppCompatActivity() {
     private var binding: ActivityOtpBinding? = null
@@ -72,14 +73,26 @@ class OtpActivity : AppCompatActivity() {
     private fun observeOtpResponse() {
         AuthRepository.resendOtpResponse.observe(this@OtpActivity) {
             if (it != null) {
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(
+                    this,
+                    it.message,
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    true
+                );
             }
         }
 
         AuthRepository.verifyOtpResponse.observe(this@OtpActivity) {
             if (it != null) {
-                Toast.makeText(this, "Verifikasi OTP Berhasil, Silahkan Login", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(this, "Verifikasi OTP Berhasil, Silahkan Login", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(
+                    this,
+                    "Verifikasi OTP Berhasil, Silahkan Login",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    true
+                );
                 val intent = Intent(this@OtpActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
