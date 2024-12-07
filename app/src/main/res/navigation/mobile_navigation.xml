@@ -19,13 +19,6 @@
 
 
     <fragment
-        android:id="@+id/navigation_camera"
-        android:name="com.example.dokumin.ui.camera.CameraFragment"
-        android:label="@string/camera"
-        tools:layout="@layout/fragment_camera" />
-
-
-    <fragment
         android:id="@+id/navigation_folder"
         android:name="com.example.dokumin.ui.folder.FolderFragment"
         android:label="@string/folder"
