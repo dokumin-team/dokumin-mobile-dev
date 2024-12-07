@@ -26,6 +26,7 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         binding?.registerNowBtn?.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)

@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.dokumin.R
 import com.example.dokumin.data.repositories.AuthRepository
 import com.example.dokumin.databinding.ActivityOtpBinding
+import com.example.dokumin.databinding.ActivitySignInBinding
 import com.example.dokumin.ui.MainActivity
 import com.example.dokumin.ui.auth.signin.SignInActivity
 
@@ -20,6 +21,7 @@ class OtpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        binding = ActivityOtpBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         startOtpTimer()
