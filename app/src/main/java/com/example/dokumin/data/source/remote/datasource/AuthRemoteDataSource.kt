@@ -1,5 +1,6 @@
 package com.example.dokumin.data.source.remote.datasource
 
+import android.util.Log
 import com.example.dokumin.data.model.requests.ResendOtpRequest
 import com.example.dokumin.data.model.requests.SignInRequest
 import com.example.dokumin.data.model.responses.SignupModel
@@ -8,6 +9,7 @@ import com.example.dokumin.data.model.requests.VerifyOtpRequest
 import com.example.dokumin.data.model.responses.SigninModel
 import com.example.dokumin.data.model.responses.VerifyOtpModel
 import com.example.dokumin.data.source.remote.RetrofitConfig
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +26,14 @@ object AuthRemoteDataSource {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
-                    onResult(Result.failure(Throwable(response.message())))
+                    val errorJsonString = response.errorBody()?.string()
+                    val message =try {
+                        val jsonObject = JSONObject(errorJsonString.toString()) // Parse the JSON string
+                        jsonObject.optString("message", "Unknown error") // Extract "message" or provide default
+                    } catch (e: Exception) {
+                        "Error parsing response: ${e.message}" // Handle parsing error
+                    }
+                    onResult(Result.failure(Throwable(message)))
                 }
             }
 
@@ -45,7 +54,14 @@ object AuthRemoteDataSource {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
-                    onResult(Result.failure(Throwable(response.message())))
+                    val errorJsonString = response.errorBody()?.string()
+                    val message =try {
+                        val jsonObject = JSONObject(errorJsonString.toString()) // Parse the JSON string
+                        jsonObject.optString("message", "Unknown error") // Extract "message" or provide default
+                    } catch (e: Exception) {
+                        "Error parsing response: ${e.message}" // Handle parsing error
+                    }
+                    onResult(Result.failure(Throwable(message)))
                 }
             }
 
@@ -69,7 +85,14 @@ object AuthRemoteDataSource {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
-                    onResult(Result.failure(Throwable(response.message())))
+                    val errorJsonString = response.errorBody()?.string()
+                    val message =try {
+                        val jsonObject = JSONObject(errorJsonString.toString()) // Parse the JSON string
+                        jsonObject.optString("message", "Unknown error") // Extract "message" or provide default
+                    } catch (e: Exception) {
+                        "Error parsing response: ${e.message}" // Handle parsing error
+                    }
+                    onResult(Result.failure(Throwable(message)))
                 }
             }
 
@@ -94,7 +117,14 @@ object AuthRemoteDataSource {
                 if (response.isSuccessful) {
                     onResult(Result.success(response.body()))
                 } else {
-                    onResult(Result.failure(Throwable(response.message())))
+                    val errorJsonString = response.errorBody()?.string()
+                    val message =try {
+                        val jsonObject = JSONObject(errorJsonString.toString()) // Parse the JSON string
+                        jsonObject.optString("message", "Unknown error") // Extract "message" or provide default
+                    } catch (e: Exception) {
+                        "Error parsing response: ${e.message}" // Handle parsing error
+                    }
+                    onResult(Result.failure(Throwable(message)))
                 }
             }
 
