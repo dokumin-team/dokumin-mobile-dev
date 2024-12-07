@@ -79,7 +79,7 @@ class OtpActivity : AppCompatActivity() {
                     FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS,
                     true
-                );
+                ).show();
             }
         }
 
@@ -92,7 +92,7 @@ class OtpActivity : AppCompatActivity() {
                     FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS,
                     true
-                );
+                ).show();
                 val intent = Intent(this@OtpActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()

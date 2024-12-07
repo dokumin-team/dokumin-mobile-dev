@@ -69,7 +69,7 @@ class SignUpActivity : AppCompatActivity() {
                     FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS,
                     true
-                );
+                ).show();
                 // retrieve token
                 val token = it.token
                 RetrofitConfig.token = token.toString()
@@ -89,7 +89,7 @@ class SignUpActivity : AppCompatActivity() {
                     FancyToast.LENGTH_LONG,
                     FancyToast.ERROR,
                     true
-                );
+                ).show();
             }
         }
     }

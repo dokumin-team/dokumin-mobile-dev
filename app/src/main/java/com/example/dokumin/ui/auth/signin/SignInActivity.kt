@@ -62,7 +62,7 @@ class SignInActivity : AppCompatActivity() {
                     FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS,
                     true
-                );
+                ).show();
 
                 // retrieve and save token
                 val token = it.token
@@ -86,7 +86,7 @@ class SignInActivity : AppCompatActivity() {
                     FancyToast.LENGTH_LONG,
                     FancyToast.ERROR,
                     true
-                );
+                ).show();
                 if (it == "Email has not been verified yet. Check your inbox!") {
                     // save email to AuthRepository
                     AuthRepository.email = binding?.etEmail?.text.toString()
