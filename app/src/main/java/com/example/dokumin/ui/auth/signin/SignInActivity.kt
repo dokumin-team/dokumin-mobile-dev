@@ -77,6 +77,12 @@ class SignInActivity : AppCompatActivity() {
         AuthRepository.errorMessage.observe(this) {
             if (it != null) {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+
+                if (it == "Email has not been verified yet. Check your inbox!"){
+                    val intent = Intent(this@SignInActivity, OtpActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
 
