@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.dokumin.R
 import com.example.dokumin.data.repositories.AuthRepository
 import com.example.dokumin.data.repositories.AuthRepository.errorMessage
+import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import com.example.dokumin.databinding.ActivityMainBinding
 import com.example.dokumin.databinding.ActivitySignUpBinding
@@ -19,6 +20,9 @@ import com.example.dokumin.ui.auth.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
     private var binding: ActivitySignUpBinding? = null
+    private val appPreferences by lazy {
+        AppPreferences(this@SignUpActivity)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -61,6 +65,8 @@ class SignUpActivity : AppCompatActivity() {
                 // retrieve token
                 val token = it.token
                 RetrofitConfig.token = token.toString()
+                // save token to preferences
+                appPreferences.saveSession(token.toString())
                 // navigate to otp screen
                 val intent = Intent(this, OtpActivity::class.java)
                 startActivity(intent)

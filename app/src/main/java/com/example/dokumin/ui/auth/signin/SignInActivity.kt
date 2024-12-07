@@ -79,6 +79,10 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
                 if (it == "Email has not been verified yet. Check your inbox!"){
+                    // save email to AuthRepository
+                    AuthRepository.email = binding?.etEmail?.text.toString()
+                    RetrofitConfig.token = appPreferences.getSession()
+
                     val intent = Intent(this@SignInActivity, OtpActivity::class.java)
                     startActivity(intent)
                     finish()
