@@ -1,9 +1,9 @@
 package com.example.dokumin.data.model.requests
 
-data class VerifyOtpRequest (
+data class ResendOtpRequest (
     var email: String,
 )
 
-data class ResendOtpRequest (
+data class VerifyOtpRequest (
     var OTP: String,
 )

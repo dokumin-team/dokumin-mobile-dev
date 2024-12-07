@@ -18,6 +18,7 @@ interface ApiService {
         @Body registerRequest: SignupRequest
     ):Call<SignupModel?>
 
+    @POST("users/signin")
     fun signInUser(
         @Body loginRequest: SignInRequest
     ):Call<SigninModel?>

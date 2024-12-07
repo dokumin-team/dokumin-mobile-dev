@@ -1,5 +1,6 @@
 package com.example.dokumin.data.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.load.engine.Resource
@@ -23,12 +24,13 @@ object AuthRepository {
     val signInResponse: LiveData<SigninModel?> = _signInResponse
     fun signIn(email: String, password: String) {
         // Call API
-        val data = SignInRequest(email, password)
+        val data = SignInRequest(email = email, password = password)
         AuthRemoteDataSource.doSignIn(
             data, { result ->
                 if (result.isSuccess) {
                     _signInResponse.value = result.getOrNull()
                 } else {
+                    Log.d("SIGIN REPO", result.exceptionOrNull()?.message.toString())
                     _errorMessage.value = result.exceptionOrNull()?.message
                 }
             }
@@ -39,7 +41,9 @@ object AuthRepository {
     val signUpResponse: LiveData<SignupModel?> = _signUpResponse
     fun signUp(email: String, password: String, name: String) {
         // Call API
-        val data = SignupRequest(email, password, name)
+        val data = SignupRequest(
+            email = email, password = password, name = name
+        )
         AuthRemoteDataSource.doSignUp(
             data, { result ->
                 if (result.isSuccess) {
