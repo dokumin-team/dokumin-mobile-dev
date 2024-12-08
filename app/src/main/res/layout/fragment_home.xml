@@ -155,10 +155,10 @@
                         android:gravity="start" />
 
                     <TextView
+                        android:id="@+id/tv_total_folders"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:text="5"
                         android:textColor="@color/ocean_blue"
                         android:fontFamily="@font/poppins_semibold"
                         android:textSize="12sp" />

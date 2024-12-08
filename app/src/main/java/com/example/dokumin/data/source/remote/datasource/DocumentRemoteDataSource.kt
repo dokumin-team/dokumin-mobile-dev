@@ -2,6 +2,7 @@ package com.example.dokumin.data.source.remote.datasource
 
 import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.ListDocumentModel
+import com.example.dokumin.data.model.responses.folder.CountFolderResponse
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import org.json.JSONObject
 import retrofit2.Call
@@ -111,4 +112,6 @@ object DocumentRemoteDataSource {
             }
         )
     }
+
+
 }
