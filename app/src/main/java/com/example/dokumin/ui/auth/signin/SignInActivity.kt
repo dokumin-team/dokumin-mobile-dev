@@ -45,7 +45,6 @@ class SignInActivity : AppCompatActivity() {
                 binding?.etEmail?.text.toString(),
                 binding?.etPassword?.text.toString()
             )
-
         }
 
         observeSignInResponse()

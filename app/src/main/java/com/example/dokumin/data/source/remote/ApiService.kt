@@ -2,17 +2,22 @@ package com.example.dokumin.data.source.remote
 
 import com.example.dokumin.data.model.requests.ResendOtpRequest
 import com.example.dokumin.data.model.requests.SignInRequest
-import com.example.dokumin.data.model.responses.SignupModel
+import com.example.dokumin.data.model.responses.auth.SignupModel
 import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.requests.VerifyOtpRequest
-import com.example.dokumin.data.model.responses.SigninModel
-import com.example.dokumin.data.model.responses.VerifyOtpModel
+import com.example.dokumin.data.model.responses.auth.SigninModel
+import com.example.dokumin.data.model.responses.auth.VerifyOtpModel
+import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiService {
+
+
+    // AUTH
     @POST("users/signup")
     fun signUpUser(
         @Body registerRequest: SignupRequest
@@ -34,6 +39,16 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body email: ResendOtpRequest
     ):Call<VerifyOtpModel?>
+
+
+    // FOLDERS
+    @GET("folders/getListFolder")
+    fun getFolders(
+        @Header("Authorization") token: String
+    ):Call<ListFolderModel?>
+
+
+    // DOCUMENTS
 
 
 }

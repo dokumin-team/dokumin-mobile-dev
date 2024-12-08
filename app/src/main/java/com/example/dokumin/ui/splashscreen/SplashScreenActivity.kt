@@ -36,9 +36,11 @@ class SplashScreenActivity : AppCompatActivity() {
             if (RetrofitConfig.token != "") {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+            }else{
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
             }
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
+
         }
 
         finish()

@@ -1,4 +1,4 @@
-package com.example.dokumin.data.model.responses
+package com.example.dokumin.data.model.responses.auth
 
 data class SigninModel(
     var `data`: Data?,

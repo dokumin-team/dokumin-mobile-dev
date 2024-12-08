@@ -1,13 +1,12 @@
 package com.example.dokumin.data.source.remote.datasource
 
-import android.util.Log
 import com.example.dokumin.data.model.requests.ResendOtpRequest
 import com.example.dokumin.data.model.requests.SignInRequest
-import com.example.dokumin.data.model.responses.SignupModel
+import com.example.dokumin.data.model.responses.auth.SignupModel
 import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.requests.VerifyOtpRequest
-import com.example.dokumin.data.model.responses.SigninModel
-import com.example.dokumin.data.model.responses.VerifyOtpModel
+import com.example.dokumin.data.model.responses.auth.SigninModel
+import com.example.dokumin.data.model.responses.auth.VerifyOtpModel
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import org.json.JSONObject
 import retrofit2.Call
