@@ -5,41 +5,76 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dokumin.R
-import com.example.dokumin.adapter.FileAdapter
-import com.example.dokumin.data.file.FileItem
+import com.example.dokumin.adapter.DocumentAdapter
+import com.example.dokumin.data.model.responses.document.Document
+import com.example.dokumin.data.repositories.DocumentRepository
+import com.example.dokumin.data.repositories.DocumentRepository.documentList
 import com.example.dokumin.databinding.FragmentDocumentBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class DocumentFragment : Fragment() {
 
-    private var _binding: FragmentDocumentBinding? = null
-
+    private var binding: FragmentDocumentBinding? = null
+    private var documentAdapter: DocumentAdapter? = null
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_document, container, false)
+    ): View? {
+        binding = FragmentDocumentBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
-        val sampleData = listOf(
-            FileItem("Document 1", R.drawable.docs),
-            FileItem("Document 2", R.drawable.docs),
-            FileItem("Document 3", R.drawable.docs),
-            FileItem("Document 4", R.drawable.docs),
-            FileItem("Document 5", R.drawable.docs)
-        )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        DocumentRepository.getDocuments()
+        observeListDocument()
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_document)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = FileAdapter(sampleData)
+    }
 
-        return view
+    private fun setupRecyclerView() {
+       documentAdapter = DocumentAdapter(
+           onDocument = ::onDocumentCLick
+       )
+
+        binding?.rvDocument?.apply {
+            adapter = documentAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun onDocumentCLick(Document: Document?) {
+        FancyToast.makeText(
+            requireContext(),
+            Document?.fileName ?: "",
+            FancyToast.LENGTH_SHORT,
+            FancyToast.SUCCESS,
+            false
+        ).show()
+    }
+
+    private fun observeListDocument() {
+        documentList.observe(viewLifecycleOwner) { it ->
+            documentAdapter?.setList(it ?: emptyList())
+        }
+        DocumentRepository.errorMessage.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                FancyToast.makeText(
+                    requireContext(),
+                    it,
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
+        binding = null
         super.onDestroyView()
-        _binding = null
+
     }
 }

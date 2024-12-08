@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.source.remote.datasource.DocumentRemoteDataSource
 
-class DocumentRepository {
+object DocumentRepository {
 
     private val _errorMessage: MutableLiveData<String?> = MutableLiveData()
     val errorMessage: LiveData<String?> = _errorMessage
