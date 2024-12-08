@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dokumin.adapter.DocumentAdapter
 import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.repositories.DocumentRepository
+import com.example.dokumin.data.repositories.DocumentRepository.countDocument
 import com.example.dokumin.data.repositories.DocumentRepository.newestDocumentList
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.databinding.FragmentHomeBinding
@@ -61,10 +62,18 @@ class HomeFragment : Fragment() {
             textSize = 22f
             text = spannable
         }
+
+        DocumentRepository.getCountDocuments()
         DocumentRepository.getNewestDocuments()
         setupRecyclerView()
         observeListDocument()
+        observeCountDocument()
     }
+
+    private fun observeCountDocument() {
+        countDocument.observe(viewLifecycleOwner) { it -> binding?.tvTotalDocs?.text = it?.totalCount.toString() }
+    }
+
 
     fun onDocumentClick(document: Document?) {
         FancyToast.makeText(

@@ -2,6 +2,7 @@ package com.example.dokumin.data.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.source.remote.datasource.DocumentRemoteDataSource
 
@@ -15,6 +16,9 @@ object DocumentRepository {
 
     private val _newestDocumentList: MutableLiveData<List<Document>> = MutableLiveData()
     val newestDocumentList: LiveData<List<Document>> = _newestDocumentList
+
+    private val _countDocument: MutableLiveData<CountDocumentResponse?> = MutableLiveData()
+    val countDocument: LiveData<CountDocumentResponse?> = _countDocument
 
     fun getDocuments() {
         DocumentRemoteDataSource.getDocument(
@@ -33,6 +37,18 @@ object DocumentRepository {
             onResult = { result ->
                 if (result.isSuccess) {
                     _newestDocumentList.value = result.getOrNull()?.documents
+                } else {
+                    _errorMessage.value = result.exceptionOrNull()?.message
+                }
+            }
+        )
+    }
+
+    fun getCountDocuments() {
+        DocumentRemoteDataSource.getCountDocument(
+            onResult = { result ->
+                if (result.isSuccess) {
+                    _countDocument.value = result.getOrNull()
                 } else {
                     _errorMessage.value = result.exceptionOrNull()?.message
                 }

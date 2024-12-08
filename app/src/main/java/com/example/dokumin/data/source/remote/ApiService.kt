@@ -7,6 +7,7 @@ import com.example.dokumin.data.model.requests.VerifyOtpRequest
 import com.example.dokumin.data.model.responses.auth.SigninModel
 import com.example.dokumin.data.model.responses.auth.SignupModel
 import com.example.dokumin.data.model.responses.auth.VerifyOtpModel
+import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.ListDocumentModel
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import retrofit2.Call
@@ -59,5 +60,10 @@ interface ApiService {
     fun getNewestDocument(
         @Header("Authorization") token: String
     ):Call<ListDocumentModel?>
+
+    @GET("documents/countFolder")
+    fun getCountDocument(
+        @Header("Authorization") token: String
+    ):Call<CountDocumentResponse?>
 
 }
