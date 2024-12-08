@@ -7,6 +7,7 @@ import com.example.dokumin.data.model.requests.SignupRequest
 import com.example.dokumin.data.model.requests.VerifyOtpRequest
 import com.example.dokumin.data.model.responses.auth.SigninModel
 import com.example.dokumin.data.model.responses.auth.VerifyOtpModel
+import com.example.dokumin.data.model.responses.document.ListDocumentModel
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import retrofit2.Call
 import retrofit2.http.Body
@@ -49,6 +50,9 @@ interface ApiService {
 
 
     // DOCUMENTS
-
+    @GET("documents/list")
+    fun getDocument(
+        @Header("Authorization") token: String
+    ):Call<ListDocumentModel?>
 
 }
