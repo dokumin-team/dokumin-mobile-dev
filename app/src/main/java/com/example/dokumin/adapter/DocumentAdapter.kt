@@ -3,32 +3,47 @@ package com.example.dokumin.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dokumin.R
-import com.example.dokumin.data.document.DocumentItem
+import com.example.dokumin.adapter.FolderAdapter.FolderViewHolder
+import com.example.dokumin.data.model.responses.document.Document
+import com.example.dokumin.databinding.ItemDocumentBinding
+import com.example.dokumin.databinding.ItemFolderBinding
 
-class DocumentAdapter(private val documentList: List<DocumentItem>) :
+class DocumentAdapter(
+    val onDocument: (document: Document?) -> Unit
+) :
     RecyclerView.Adapter<DocumentAdapter.DocumentViewHolder>() {
+    private var documentList = listOf<Document?>()
+    fun setList(documentList: List<Document?>) {
+        this.documentList = documentList
+        notifyDataSetChanged()
+    }
 
-    inner class DocumentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val documentName: TextView = itemView.findViewById(R.id.documentTextView)
-        val documentImage: ImageView = itemView.findViewById(R.id.img_item_photo_docs)
+    inner class DocumentViewHolder(val binding: ItemDocumentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(itemDocument: Document?) {
+            binding.imgItemPhotoDocs.setImageResource(R.drawable.docs)
+            binding.tvDocumentName.text = itemDocument?.fileName
+            binding.root.setOnClickListener {
+                onDocument(itemDocument)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocumentViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_document, parent, false)
+        val view = ItemDocumentBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return DocumentViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
-        val currentItem = documentList[position]
-        holder.documentName.text = currentItem.documentName
-        if (currentItem.documentImageResId != 0) {
-            holder.documentImage.setImageResource(currentItem.documentImageResId)
-        }
+        val folder = documentList[position]
+        holder.bind(folder)
     }
 
-    override fun getItemCount() = documentList.size
+    override fun getItemCount(): Int = documentList.size
 }
