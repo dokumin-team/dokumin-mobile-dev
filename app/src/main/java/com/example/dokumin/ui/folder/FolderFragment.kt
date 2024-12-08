@@ -6,35 +6,79 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dokumin.R
 import com.example.dokumin.adapter.FolderAdapter
 import com.example.dokumin.data.folder.FolderItem
+import com.example.dokumin.data.model.responses.folder.Folder
+import com.example.dokumin.data.repositories.FolderReposiotry
+import com.example.dokumin.data.repositories.FolderReposiotry.folderList
+import com.example.dokumin.databinding.FragmentFolderBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class FolderFragment : Fragment() {
 
+    private var binding: FragmentFolderBinding? = null
+    private var folderAdapter: FolderAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_folder, container, false)
+        binding = FragmentFolderBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        FolderReposiotry.getFolders()
+        observeListFolder()
 
-        val folderList = listOf(
-            FolderItem("Documents"),
-            FolderItem("Images"),
-            FolderItem("Videos"),
-            FolderItem("Music"),
-            FolderItem("Downloads")
+    }
+
+    private fun setupRecyclerView() {
+        folderAdapter = FolderAdapter(
+            onFolderClick = ::onFolderCLick
         )
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.FolderList)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.adapter = FolderAdapter(folderList)
+        binding?.FolderList?.apply {
+            adapter = folderAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+    }
+
+    private fun onFolderCLick(folder: Folder?) {
+        FancyToast.makeText(
+            requireContext(),
+            folder?.folderName ?: "",
+            FancyToast.LENGTH_SHORT,
+            FancyToast.SUCCESS,
+            false
+        ).show()
+    }
+
+    private fun observeListFolder() {
+        folderList.observe(viewLifecycleOwner){ it ->
+            folderAdapter?.setList(it?.folders ?: emptyList())
+        }
+        FolderReposiotry.errorMessage.observe(viewLifecycleOwner){ error ->
+            error?.let {
+                FancyToast.makeText(
+                    requireContext(),
+                    it,
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }
+
+        }
+
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
 
     }
 }

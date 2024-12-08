@@ -3,7 +3,7 @@ package com.example.dokumin.data.model.responses.folder
 data class Folder(
     var createdAt: CreatedAt?,
     var id: String?,
-    var name: String?
+    var folderName: String?
 )
 
 data class CreatedAt(

@@ -13,7 +13,6 @@ object FolderReposiotry {
     private val _folderList: MutableLiveData<ListFolderModel?> = MutableLiveData()
     val folderList : LiveData<ListFolderModel?> = _folderList
 
-
     fun getFolders(){
         FolderRemoteDataSource.getFolders(
             onResult = { result ->
