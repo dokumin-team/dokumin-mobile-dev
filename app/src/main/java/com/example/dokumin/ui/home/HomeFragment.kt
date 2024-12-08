@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dokumin.adapter.DocumentAdapter
 import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.repositories.DocumentRepository
-import com.example.dokumin.data.repositories.DocumentRepository.documentList
+import com.example.dokumin.data.repositories.DocumentRepository.newestDocumentList
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.databinding.FragmentHomeBinding
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
             textSize = 22f
             text = spannable
         }
-        DocumentRepository.getDocuments()
+        DocumentRepository.getNewestDocuments()
         setupRecyclerView()
         observeListDocument()
     }
@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeListDocument() {
-        documentList.observe(viewLifecycleOwner) { it ->
+        newestDocumentList.observe(viewLifecycleOwner) { it ->
             documentAdapter?.setList(it ?: emptyList())
         }
         DocumentRepository.errorMessage.observe(viewLifecycleOwner) { error ->

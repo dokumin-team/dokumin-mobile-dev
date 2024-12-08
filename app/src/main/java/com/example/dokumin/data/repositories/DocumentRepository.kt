@@ -13,11 +13,26 @@ object DocumentRepository {
     private val _documentList: MutableLiveData<List<Document>> = MutableLiveData()
     val documentList: LiveData<List<Document>> = _documentList
 
+    private val _newestDocumentList: MutableLiveData<List<Document>> = MutableLiveData()
+    val newestDocumentList: LiveData<List<Document>> = _newestDocumentList
+
     fun getDocuments() {
         DocumentRemoteDataSource.getDocument(
             onResult = { result ->
                 if (result.isSuccess) {
                     _documentList.value = result.getOrNull()?.documents
+                } else {
+                    _errorMessage.value = result.exceptionOrNull()?.message
+                }
+            }
+        )
+    }
+
+    fun getNewestDocuments() {
+        DocumentRemoteDataSource.getNewestDocument(
+            onResult = { result ->
+                if (result.isSuccess) {
+                    _newestDocumentList.value = result.getOrNull()?.documents
                 } else {
                     _errorMessage.value = result.exceptionOrNull()?.message
                 }
