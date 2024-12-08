@@ -2,14 +2,8 @@ package com.example.dokumin.ui.auth.signin
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.dokumin.R
 import com.example.dokumin.data.repositories.AuthRepository
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.data.source.remote.RetrofitConfig
@@ -68,6 +62,7 @@ class SignInActivity : AppCompatActivity() {
                 RetrofitConfig.token = token.toString()
                 // save to preferences
                 appPreferences.saveSession(token.toString())
+                appPreferences.saveUserName(it.data?.name)
 
                 if (appPreferences.getSession() != "") {
                     val intent = Intent(this@SignInActivity, MainActivity::class.java)

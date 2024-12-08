@@ -8,26 +8,39 @@ import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dokumin.R
-import com.example.dokumin.adapter.FileAdapter
-import com.example.dokumin.data.file.FileItem
+import com.example.dokumin.adapter.DocumentAdapter
+import com.example.dokumin.data.model.responses.document.Document
+import com.example.dokumin.data.repositories.DocumentRepository
+import com.example.dokumin.data.repositories.DocumentRepository.documentList
+import com.example.dokumin.data.source.preferences.AppPreferences
+import com.example.dokumin.databinding.FragmentHomeBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class HomeFragment : Fragment() {
 
+    private var binding : FragmentHomeBinding? = null
+    private var documentAdapter: DocumentAdapter? = null
+    private val appPreferences by lazy {
+        AppPreferences(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Setting up the welcome text with bold styling
-        val welcomeTextView = root.findViewById<TextView>(R.id.welcomeText)
-        val fullText = "Welcome Cinta\nto Dokumin"
+
+        val fullText = "Welcome ${appPreferences.getUserName()}\nto Dokumin"
         val spannable = SpannableString(fullText)
 
         spannable.setSpan(
@@ -44,19 +57,57 @@ class HomeFragment : Fragment() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        welcomeTextView.textSize = 22f
-        welcomeTextView.text = spannable
-
-        val sampleData = listOf(
-            FileItem("Document 1", R.drawable.docs),
-            FileItem("Document 2", R.drawable.docs),
-            FileItem("Document 3", R.drawable.docs),
-        )
-
-        val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = FileAdapter(sampleData)
-
-        return root
+        binding?.welcomeText?.apply {
+            textSize = 22f
+            text = spannable
+        }
+        DocumentRepository.getDocuments()
+        setupRecyclerView()
+        observeListDocument()
     }
+
+    fun onDocumentClick(document: Document?) {
+        FancyToast.makeText(
+            requireContext(),
+            document?.fileName ?: "",
+            FancyToast.LENGTH_SHORT,
+            FancyToast.SUCCESS,
+            false
+        ).show()
+    }
+
+    private fun observeListDocument() {
+        documentList.observe(viewLifecycleOwner) { it ->
+            documentAdapter?.setList(it ?: emptyList())
+        }
+        DocumentRepository.errorMessage.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                FancyToast.makeText(
+                    requireContext(),
+                    it,
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        documentAdapter = DocumentAdapter(
+            onDocument = ::onDocumentClick
+        )
+        binding?.recyclerView?.apply {
+            adapter = documentAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
+    }
+
 }

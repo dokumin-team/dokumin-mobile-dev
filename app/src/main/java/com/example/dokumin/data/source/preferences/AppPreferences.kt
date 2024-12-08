@@ -5,8 +5,9 @@ import android.content.Context
 
 class AppPreferences(val mContext: Context) {
     companion object {
-        const val prefName = "usr_token"
+        const val prefName = "usr_pref"
         const val tokenKey = "usr_token"
+        const val usernameKey = "usr_name"
         const val isFirst = true
     }
 
@@ -45,5 +46,17 @@ class AppPreferences(val mContext: Context) {
     fun getSession(): String {
         val token = preferences.getString(tokenKey, "")
         return token.toString()
+    }
+
+    fun saveUserName(name: String?) {
+        editor.apply {
+            putString(usernameKey, name)
+            apply()
+            commit()
+        }
+    }
+
+    fun getUserName(): String {
+        return preferences.getString(usernameKey, "").toString()
     }
 }
