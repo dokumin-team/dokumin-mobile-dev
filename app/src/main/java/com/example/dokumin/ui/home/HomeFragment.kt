@@ -15,6 +15,8 @@ import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.repositories.DocumentRepository
 import com.example.dokumin.data.repositories.DocumentRepository.countDocument
 import com.example.dokumin.data.repositories.DocumentRepository.newestDocumentList
+import com.example.dokumin.data.repositories.FolderRepository
+import com.example.dokumin.data.repositories.FolderRepository.countFolder
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.databinding.FragmentHomeBinding
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -65,9 +67,15 @@ class HomeFragment : Fragment() {
 
         DocumentRepository.getCountDocuments()
         DocumentRepository.getNewestDocuments()
+        FolderRepository.getCountFolder()
         setupRecyclerView()
         observeListDocument()
         observeCountDocument()
+        observeCountFolder()
+    }
+
+    private fun observeCountFolder() {
+        countFolder.observe(viewLifecycleOwner) { it -> binding?.tvTotalFolders?.text = it?.totalCount.toString() }
     }
 
     private fun observeCountDocument() {

@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dokumin.R
 import com.example.dokumin.adapter.FolderAdapter
-import com.example.dokumin.data.folder.FolderItem
 import com.example.dokumin.data.model.responses.folder.Folder
-import com.example.dokumin.data.repositories.FolderReposiotry
-import com.example.dokumin.data.repositories.FolderReposiotry.folderList
+import com.example.dokumin.data.repositories.FolderRepository
+import com.example.dokumin.data.repositories.FolderRepository.folderList
 import com.example.dokumin.databinding.FragmentFolderBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 
@@ -31,7 +28,7 @@ class FolderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        FolderReposiotry.getFolders()
+        FolderRepository.getFolders()
         observeListFolder()
 
     }
@@ -61,7 +58,7 @@ class FolderFragment : Fragment() {
         folderList.observe(viewLifecycleOwner){ it ->
             folderAdapter?.setList(it?.folders ?: emptyList())
         }
-        FolderReposiotry.errorMessage.observe(viewLifecycleOwner){ error ->
+        FolderRepository.errorMessage.observe(viewLifecycleOwner){ error ->
             error?.let {
                 FancyToast.makeText(
                     requireContext(),

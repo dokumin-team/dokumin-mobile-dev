@@ -1,5 +1,6 @@
 package com.example.dokumin.data.source.remote.datasource
 
+import com.example.dokumin.data.model.responses.folder.CountFolderResponse
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import org.json.JSONObject
@@ -42,6 +43,40 @@ object FolderRemoteDataSource {
             }
         )
 
+    }
+
+    fun getCountFolder(
+        onResult: (Result<CountFolderResponse?>) -> Unit,
+    ) {
+        val call = RetrofitConfig.ApiService.getCountFolder(
+            "Bearer ${RetrofitConfig.token}"
+        )
+        call.enqueue(
+            object : Callback<CountFolderResponse?> {
+                override fun onResponse(
+                    call: Call<CountFolderResponse?>,
+                    response: Response<CountFolderResponse?>
+                ) {
+                    if (response.isSuccessful) {
+                        onResult(Result.success(response.body()))
+                    } else {
+                        val errorJsonString = response.errorBody()?.string()
+                        val message = try {
+                            val jsonObject = JSONObject(errorJsonString.toString())
+                            jsonObject.optString("message", "Unknown error")
+                        } catch (e: Exception) {
+                            "Error parsing response: ${e.message}"
+                        }
+                        onResult(Result.failure(Throwable(message)))
+
+                    }
+                }
+
+                override fun onFailure(call: Call<CountFolderResponse?>, t: Throwable) {
+                    onResult(Result.failure(t))
+                }
+            }
+        )
     }
 
 }

@@ -1,16 +1,10 @@
 package com.example.dokumin.adapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dokumin.R
-import com.example.dokumin.data.folder.FolderItem
 import com.example.dokumin.data.model.responses.folder.Folder
-import com.example.dokumin.data.repositories.FolderReposiotry.folderList
 import com.example.dokumin.databinding.ItemFolderBinding
 
 class FolderAdapter(
