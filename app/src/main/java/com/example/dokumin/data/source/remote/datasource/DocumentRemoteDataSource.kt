@@ -2,7 +2,6 @@ package com.example.dokumin.data.source.remote.datasource
 
 import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.ListDocumentModel
-import com.example.dokumin.data.model.responses.folder.CountFolderResponse
 import com.example.dokumin.data.source.remote.RetrofitConfig
 import org.json.JSONObject
 import retrofit2.Call
@@ -111,6 +110,46 @@ object DocumentRemoteDataSource {
                 }
             }
         )
+    }
+
+    fun getDocumentByFolder(
+        folderId: String?,
+        onResult: (Result<ListDocumentModel?>) -> Unit,
+    ) {
+        val call = RetrofitConfig.ApiService.getDocumentByFolder(
+            "Bearer ${RetrofitConfig.token}",
+            folderId = folderId.toString()
+        )
+
+        call.enqueue(
+            object : Callback<ListDocumentModel?> {
+                override fun onResponse(
+                    call: Call<ListDocumentModel?>,
+                    response: Response<ListDocumentModel?>
+                ) {
+                    if (response.isSuccessful) {
+                        onResult(Result.success(response.body()))
+                    } else {
+                        val errorJsonString = response.errorBody()?.string()
+                        val message = try {
+                            val jsonObject = JSONObject(errorJsonString.toString())
+                            jsonObject.optString("message", "Unknown error")
+                        } catch (e: Exception) {
+                            "Error parsing response: ${e.message}"
+                        }
+                        onResult(Result.failure(Throwable(message)))
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ListDocumentModel?>, t: Throwable) {
+                    onResult(Result.failure(t))
+                }
+
+            }
+        )
+
+
     }
 
 

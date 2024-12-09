@@ -1,16 +1,18 @@
 package com.example.dokumin.ui.folder
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dokumin.adapter.FolderAdapter
 import com.example.dokumin.data.model.responses.folder.Folder
 import com.example.dokumin.data.repositories.FolderRepository
 import com.example.dokumin.data.repositories.FolderRepository.folderList
 import com.example.dokumin.databinding.FragmentFolderBinding
+import com.example.dokumin.ui.folder.detailfolder.DetailFolderActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class FolderFragment : Fragment() {
@@ -45,13 +47,9 @@ class FolderFragment : Fragment() {
     }
 
     private fun onFolderCLick(folder: Folder?) {
-        FancyToast.makeText(
-            requireContext(),
-            folder?.folderName ?: "",
-            FancyToast.LENGTH_SHORT,
-            FancyToast.SUCCESS,
-            false
-        ).show()
+        FolderRepository.selectedFolder = folder
+        val intent = Intent(requireActivity(), DetailFolderActivity::class.java)
+        startActivity(intent)
     }
 
     private fun observeListFolder() {

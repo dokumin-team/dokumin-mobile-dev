@@ -24,6 +24,9 @@ object DocumentRepository {
     var selectedDocument: Document? = null
     var selectedDocType : DocType? = null
 
+    private val _documentFolderList: MutableLiveData<List<Document>> = MutableLiveData()
+    val documentFolderList: LiveData<List<Document>> = _documentFolderList
+
     fun getDocuments() {
         DocumentRemoteDataSource.getDocument(
             onResult = { result ->
@@ -60,6 +63,16 @@ object DocumentRepository {
         )
     }
 
+    fun getDocumentsByFolder(folderId: String?) {
+        DocumentRemoteDataSource.getDocumentByFolder(folderId){ it ->
+            if (it.isSuccess){
+                _documentFolderList.value = it.getOrNull()?.documents
+            }else{
+                _errorMessage.value = it.exceptionOrNull()?.message
+            }
+        }
+
+    }
 
 
 }

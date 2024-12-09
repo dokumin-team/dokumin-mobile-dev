@@ -16,6 +16,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -72,10 +73,10 @@ interface ApiService {
         @Header("Authorization") token: String
     ):Call<CountFolderResponse?>
 
-    @GET("documents/listDocumentFolder/:folderId")
+    @GET("documents/listDocumentFolder/{folderId}")
     fun getDocumentByFolder(
         @Header("Authorization") token: String,
-        folderId: String
+        @Path("folderId") folderId: String
     ):Call<ListDocumentModel?>
 
 
