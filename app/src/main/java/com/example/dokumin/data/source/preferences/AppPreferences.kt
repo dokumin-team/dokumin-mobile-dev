@@ -16,7 +16,8 @@ class AppPreferences(val mContext: Context) {
 
     fun deleteSession() {
         editor.apply {
-            clear()
+            putString(tokenKey, "")
+            putString(usernameKey, "")
             apply()
             commit()
         }
