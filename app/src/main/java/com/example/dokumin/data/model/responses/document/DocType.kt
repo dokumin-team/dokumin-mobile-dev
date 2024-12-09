@@ -4,5 +4,6 @@ enum class DocType {
     PDF,
     DOC,
     TXT,
-    IMAGE
+    IMAGE,
+    UNKNOWN
 }

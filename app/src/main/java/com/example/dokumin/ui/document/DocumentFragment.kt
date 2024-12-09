@@ -1,13 +1,14 @@
 package com.example.dokumin.ui.document
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dokumin.adapter.DocumentAdapter
+import com.example.dokumin.data.model.responses.document.DocType
 import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.repositories.DocumentRepository
 import com.example.dokumin.data.repositories.DocumentRepository.documentList
@@ -45,14 +46,39 @@ class DocumentFragment : Fragment() {
         }
     }
 
-    private fun onDocumentCLick(Document: Document?) {
-        FancyToast.makeText(
-            requireContext(),
-            Document?.fileName ?: "",
-            FancyToast.LENGTH_SHORT,
-            FancyToast.SUCCESS,
-            false
-        ).show()
+    private fun onDocumentCLick(doc: Document?) {
+        DocumentRepository.selectedDocument = doc
+        when {
+            doc?.fileType!!.contains("application/pdf") -> {
+                DocumentRepository.selectedDocType = DocType.PDF
+            }
+            doc?.fileType!!.contains("application/doc") -> {
+                DocumentRepository.selectedDocType = DocType.DOC
+            }
+            doc?.fileType!!.contains("text/plain") -> {
+                DocumentRepository.selectedDocType = DocType.TXT
+            }
+            doc?.fileType!!.contains("image/") -> {
+                DocumentRepository.selectedDocType = DocType.IMAGE
+            }
+            else -> {
+                FancyToast.makeText(
+                    requireContext(),
+                    "File type not supported",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+                DocumentRepository.selectedDocType = DocType.UNKNOWN
+            }
+        }
+
+        // Navigate to DocumentDetailActivity if the file type is supported
+        if(DocumentRepository.selectedDocType != DocType.UNKNOWN){
+            val intent = Intent(requireActivity(), DocumentDetailActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun observeListDocument() {

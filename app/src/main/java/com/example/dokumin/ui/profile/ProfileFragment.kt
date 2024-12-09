@@ -34,6 +34,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.userName?.text = appPreferences.getUserName()
+
         // Navigasi ke FAQ Activity
         binding?.FaqMenu?.setOnClickListener {
             val intent = Intent(requireContext(), FaqActivity::class.java)
