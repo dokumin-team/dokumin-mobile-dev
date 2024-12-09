@@ -72,5 +72,12 @@ interface ApiService {
         @Header("Authorization") token: String
     ):Call<CountFolderResponse?>
 
+    @GET("documents/listDocumentFolder/:folderId")
+    fun getDocumentByFolder(
+        @Header("Authorization") token: String,
+        folderId: String
+    ):Call<ListDocumentModel?>
+
+
 
 }
