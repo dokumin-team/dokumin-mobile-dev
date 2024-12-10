@@ -24,6 +24,11 @@ class DocumentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDocumentBinding.inflate(inflater, container, false)
+
+        binding?.btnAddDoc?.setOnClickListener {
+            val intent = Intent(requireContext(), AddNewDocumentActivity::class.java)
+            startActivity(intent)
+        }
         return binding?.root
     }
 

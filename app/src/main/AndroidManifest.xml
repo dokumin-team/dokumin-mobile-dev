@@ -28,6 +28,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.folder.addFolder.AddFolderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.document.AddNewDocumentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.folder.detailfolder.DetailFolderActivity"
             android:exported="false" />
         <activity
