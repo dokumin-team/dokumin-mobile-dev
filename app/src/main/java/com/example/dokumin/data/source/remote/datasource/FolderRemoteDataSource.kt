@@ -114,7 +114,8 @@ object FolderRemoteDataSource {
                         val errorJsonString = response.errorBody()?.string()
                         val message = try {
                             val jsonObject = JSONObject(errorJsonString.toString())
-                            jsonObject.optString("message", "Unknown error")
+                            val error = jsonObject.optJSONObject("error")
+                            error?.optString("message", "Unknown error")
                         } catch (e: Exception) {
                             "Error parsing response: ${e.message}"
                         }

@@ -49,12 +49,12 @@ object FolderRepository {
         )
     }
 
-    fun postDocumentToFolder(uri: Uri, context: Context){
+    fun postDocumentToFolder(uri: Uri, context: Context, filename: String){
         FolderRemoteDataSource.postDocumentToFolder(
             folderId = selectedFolder?.id.toString(),
             context = context,
             fileUri = uri,
-            filename = uri.lastPathSegment.toString(),
+            filename = filename,
             onResult = { result ->
                 if (result.isSuccess){
                     _postDocumentToFolderResponse.value = result.getOrNull()

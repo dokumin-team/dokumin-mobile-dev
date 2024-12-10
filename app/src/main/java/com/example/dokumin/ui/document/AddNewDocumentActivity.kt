@@ -71,6 +71,7 @@ class AddNewDocumentActivity : AppCompatActivity() {
             FolderRepository.postDocumentToFolder(
                 context = this@AddNewDocumentActivity,
                 uri = selectedDocumentUri ?: return@setOnClickListener,
+                filename = selectedDocumentName ?: return@setOnClickListener
             )
         }
 
@@ -123,15 +124,19 @@ class AddNewDocumentActivity : AppCompatActivity() {
                     false
                 ).show()
                 finish()
-            } else {
-                FancyToast.makeText(
-                    this@AddNewDocumentActivity,
-                    "Failed to upload document",
-                    FancyToast.LENGTH_SHORT,
-                    FancyToast.ERROR,
-                    false
-                ).show()
             }
         }
+        FolderRepository.errorMessage.observe(this@AddNewDocumentActivity) { it ->
+            FancyToast.makeText(
+                this@AddNewDocumentActivity,
+                "Failed to upload document ${it ?: ""}",
+                FancyToast.LENGTH_SHORT,
+                FancyToast.ERROR,
+                false
+            ).show()
+        }
+
     }
+
+
 }
