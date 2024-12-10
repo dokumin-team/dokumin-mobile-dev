@@ -66,4 +66,5 @@
     <string name="create_new_folder">Create New Folder</string>
     <string name="folder_name">folder name</string>
     <string name="jumlah_folder">Jumlah Folder</string>
+    <string name="jumlah_dokumen">Jumlah Dokumen</string>
 </resources>
