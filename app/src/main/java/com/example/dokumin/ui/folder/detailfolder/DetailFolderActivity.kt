@@ -1,5 +1,6 @@
 package com.example.dokumin.ui.folder.detailfolder
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.data.repositories.DocumentRepository
 import com.example.dokumin.data.repositories.FolderRepository
 import com.example.dokumin.databinding.ActivityDetailFolderBinding
+import com.example.dokumin.ui.document.DocumentDetailActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class DetailFolderActivity : AppCompatActivity() {
@@ -64,8 +66,11 @@ class DetailFolderActivity : AppCompatActivity() {
                 DocumentRepository.selectedDocType = DocType.PDF
             }
 
-            doc?.fileType!!.contains("application/doc") -> {
+            doc?.fileType!!.contains("application/vnd.openxmlformats-officedocument.wordprocessingml.document") -> {
                 DocumentRepository.selectedDocType = DocType.DOC
+            }
+            doc?.fileType!!.contains("application/vnd.openxmlformats-officedocument.presentationml.presentation") -> {
+                DocumentRepository.selectedDocType = DocType.PPT
             }
 
             doc?.fileType!!.contains("text/plain") -> {
@@ -77,16 +82,13 @@ class DetailFolderActivity : AppCompatActivity() {
             }
 
             else -> {
-                FancyToast.makeText(
-                    this@DetailFolderActivity,
-                    "File type not supported",
-                    FancyToast.LENGTH_SHORT,
-                    FancyToast.ERROR,
-                    false
-                ).show()
+
                 DocumentRepository.selectedDocType = DocType.UNKNOWN
             }
         }
+        val intent = Intent(this@DetailFolderActivity, DocumentDetailActivity::class.java)
+        startActivity(intent)
+
     }
 
     override fun onDestroy() {

@@ -54,7 +54,7 @@ class SignInActivity : AppCompatActivity() {
                     it.message,
                     FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS,
-                    true
+                    false
                 ).show();
 
                 // retrieve and save token

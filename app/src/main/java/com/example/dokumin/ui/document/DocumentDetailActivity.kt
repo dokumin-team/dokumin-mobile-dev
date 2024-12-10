@@ -1,17 +1,18 @@
 package com.example.dokumin.ui.document
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.example.dokumin.data.model.responses.document.DocType
 import com.example.dokumin.data.repositories.DocumentRepository
-import com.example.dokumin.data.source.remote.RetrofitConfig
 import com.example.dokumin.databinding.ActivityDocumentDetailBinding
-import com.shashank.sony.fancytoastlib.FancyToast
 
 
 class DocumentDetailActivity : AppCompatActivity() {
@@ -22,64 +23,91 @@ class DocumentDetailActivity : AppCompatActivity() {
         binding = ActivityDocumentDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        // setting up webview
+        val webView = binding?.wvDocumentDetail
+
+        val webSettings = webView?.settings
+        webSettings?.javaScriptEnabled = true
+        webSettings?.loadWithOverviewMode = true
+        webSettings?.useWideViewPort = true
+
+        webView?.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest
+            ): Boolean {
+                // Return false to allow the WebView to handle the URL
+                return false
+            }
+        }
         setupDocument()
+
     }
 
     private fun setupDocument() {
+        val path = DocumentRepository.selectedDocument?.url
+        Log.d("DocumentDetailActivity", "setupDocument: $path")
         when (DocumentRepository.selectedDocType) {
-            DocType.PDF -> {
-                val path=DocumentRepository.selectedDocument?.url
-                binding?.wvDocumentDetail?.settings?.loadWithOverviewMode = true
-                binding?.wvDocumentDetail?.settings?.javaScriptEnabled = true
-                val url = "https://docs.google.com/gview?embedded=true&url=$path"
-                binding?.wvDocumentDetail?.loadUrl(url)
-            }
-
-            DocType.DOC -> {
-                val path=DocumentRepository.selectedDocument?.url
-                binding?.wvDocumentDetail?.settings?.loadWithOverviewMode = true
-                binding?.wvDocumentDetail?.settings?.javaScriptEnabled = true
-                val url = "https://docs.google.com/gview?embedded=true&url=$path"
-                binding?.wvDocumentDetail?.loadUrl(url)
-            }
-
-            DocType.TXT -> {
-                val path=DocumentRepository.selectedDocument?.url
-                binding?.wvDocumentDetail?.settings?.loadWithOverviewMode = true
-                binding?.wvDocumentDetail?.settings?.javaScriptEnabled = true
-                val url = "https://docs.google.com/gview?embedded=true&url=$path"
-                binding?.wvDocumentDetail?.loadUrl(url)
-            }
 
             DocType.IMAGE -> {
                 binding?.ivDocumentDetail?.visibility = View.VISIBLE
-
-                val glideUrl = GlideUrl(
-                    DocumentRepository.selectedDocument?.url,
-                    LazyHeaders.Builder()
-                        .addHeader("Authorization", "Bearer ${RetrofitConfig.token}")
-                        .build()
-                )
+                binding?.wvDocumentDetail?.visibility = View.GONE
 
                 Glide.with(this@DocumentDetailActivity)
-                    .load(glideUrl)
+                    .load(path)
                     .into(binding?.ivDocumentDetail!!)
-
             }
 
             else -> {
-                FancyToast.makeText(
-                    this,
-                    "Document type not recognized or not supported",
-                    FancyToast.LENGTH_LONG,
-                    FancyToast.ERROR,
-                    false
-                ).show()
-                finish()
+                binding?.wvDocumentDetail?.visibility = View.VISIBLE
+                binding?.ivDocumentDetail?.visibility = View.GONE
+                setupWebViewWithUrl(binding?.wvDocumentDetail, path.toString())
             }
         }
+    }
+
+    // This function configures the WebView to display the PDF.
+    private fun setupWebViewWithUrl(webView: WebView?, url: String) {
+
+
+            webView?.webChromeClient = object : WebChromeClient() {}
+
+            val newurl = "https://docs.google.com/gview?embedded=true&url=$url"
+            val htmlContent = getHtmlLayout(newurl)
+
+            webView?.loadDataWithBaseURL(newurl, htmlContent, "text/html", "utf-8", null)
+
 
     }
+
+
+    private fun getHtmlLayout(url: String): String {
+        return """<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <style>
+        body, html {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="$url" allow="autoplay"></iframe>
+</body>
+</html>"""
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
