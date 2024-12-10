@@ -12,6 +12,7 @@ import com.example.dokumin.data.model.responses.folder.Folder
 import com.example.dokumin.data.repositories.FolderRepository
 import com.example.dokumin.data.repositories.FolderRepository.folderList
 import com.example.dokumin.databinding.FragmentFolderBinding
+import com.example.dokumin.ui.folder.addFolder.AddFolderActivity
 import com.example.dokumin.ui.folder.detailfolder.DetailFolderActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 
@@ -32,6 +33,10 @@ class FolderFragment : Fragment() {
         setupRecyclerView()
         FolderRepository.getFolders()
         observeListFolder()
+        binding?.btnAddFolder?.setOnClickListener {
+            val intent = Intent(requireContext(), AddFolderActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
