@@ -16,11 +16,7 @@ import com.shashank.sony.fancytoastlib.FancyToast
 
 class AddNewDocumentActivity : AppCompatActivity() {
     private var binding: ActivityAddNewDocumentBinding? = null
-    var listAdapter: ArrayAdapter<Folder>? = null
-
-    companion object {
-        private const val PICK_DOCUMENT_REQUEST_CODE = 1001
-    }
+    private var listAdapter: ArrayAdapter<Folder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,25 +78,6 @@ class AddNewDocumentActivity : AppCompatActivity() {
             binding?.tvSelectedDocumet?.text = "No file selected"
         }
     }
-
-//    private fun openDocumentPicker() {
-//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-//            addCategory(Intent.CATEGORY_OPENABLE)
-//            type = "*/*" // Allow all document types
-//        }
-//        startActivityForResult(intent, PICK_DOCUMENT_REQUEST_CODE)
-//    }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == PICK_DOCUMENT_REQUEST_CODE && resultCode == RESULT_OK) {
-//            selectedDocumentUri = data?.data
-//            selectedDocumentName = selectedDocumentUri?.let { getFileName(it) }
-//
-//            // Display selected document name
-//            binding?.tvSelectedDocumet?.text = selectedDocumentName ?: "No file selected"
-//        }
-//    }
 
     private fun getFileName(uri: Uri): String? {
         val cursor = contentResolver.query(uri, null, null, null, null)
