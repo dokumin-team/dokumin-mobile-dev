@@ -1,10 +1,13 @@
 package com.example.dokumin.data.repositories
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dokumin.data.model.responses.folder.CountFolderResponse
 import com.example.dokumin.data.model.responses.folder.Folder
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
+import com.example.dokumin.data.model.responses.folder.UploadDocumentModel
 import com.example.dokumin.data.source.remote.datasource.FolderRemoteDataSource
 
 object FolderRepository {
@@ -19,6 +22,8 @@ object FolderRepository {
     val countFolder: LiveData<CountFolderResponse?> = _countFolder
 
     var selectedFolder: Folder? = null
+    private val _uploadDocumentToFolder: MutableLiveData<UploadDocumentModel?> = MutableLiveData()
+    val uploadDocumentToFolder: LiveData<UploadDocumentModel?> = _uploadDocumentToFolder
 
     fun getFolders(){
         FolderRemoteDataSource.getFolders(
@@ -41,6 +46,23 @@ object FolderRepository {
                     FolderRepository._errorMessage.value = result.exceptionOrNull()?.message
                 }
             }
+        )
+    }
+
+    fun postDocumentToFolder(uri: Uri, context: Context){
+        FolderRemoteDataSource.postDocumentToFolder(
+            folderId = selectedFolder?.id.toString(),
+            context = context,
+            fileUri = uri,
+            filename = uri.lastPathSegment.toString(),
+            onResult = { result ->
+                if (result.isSuccess){
+                    _uploadDocumentToFolder.value = result.getOrNull()
+                }else{
+                    _errorMessage.value = result.exceptionOrNull()?.message
+                }
+            }
+
         )
     }
 
