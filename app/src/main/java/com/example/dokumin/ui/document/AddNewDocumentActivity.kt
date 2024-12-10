@@ -20,8 +20,8 @@ class AddNewDocumentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityAddNewDocumentBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding?.root)
         FolderRepository.getFolders()
         FolderRepository.selectedFolder = null
@@ -49,9 +49,24 @@ class AddNewDocumentActivity : AppCompatActivity() {
                     FancyToast.LENGTH_SHORT,
                     FancyToast.ERROR,
                     false
-                )
+                ).show()
                 return@setOnClickListener
             }
+
+            if (
+                selectedDocumentUri == null ||
+                selectedDocumentName == null
+            ) {
+                FancyToast.makeText(
+                    this@AddNewDocumentActivity,
+                    "Please select a document",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+                return@setOnClickListener
+            }
+
 
             FolderRepository.postDocumentToFolder(
                 context = this@AddNewDocumentActivity,
@@ -106,7 +121,7 @@ class AddNewDocumentActivity : AppCompatActivity() {
                     FancyToast.LENGTH_SHORT,
                     FancyToast.SUCCESS,
                     false
-                )
+                ).show()
                 finish()
             } else {
                 FancyToast.makeText(
@@ -115,7 +130,7 @@ class AddNewDocumentActivity : AppCompatActivity() {
                     FancyToast.LENGTH_SHORT,
                     FancyToast.ERROR,
                     false
-                )
+                ).show()
             }
         }
     }
