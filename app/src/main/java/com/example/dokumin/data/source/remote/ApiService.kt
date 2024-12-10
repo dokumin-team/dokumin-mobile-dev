@@ -11,12 +11,17 @@ import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.ListDocumentModel
 import com.example.dokumin.data.model.responses.folder.CountFolderResponse
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
+import com.example.dokumin.data.model.responses.folder.UploadDocumentModel
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
+
 
 interface ApiService {
 
@@ -51,6 +56,14 @@ interface ApiService {
         @Header("Authorization") token: String
     ):Call<ListFolderModel?>
 
+    @Multipart
+    @POST("folders/{folderId}/upload")
+    fun postDocumentToFolder(
+        @Header("Authorization") token: String,
+        @Path("folderId") folderId: String,
+        @Part("fileName") filename: String,
+        @Part file: MultipartBody.Part?
+    ): Call<UploadDocumentModel?>
 
     // DOCUMENTS
     @GET("documents/list")
