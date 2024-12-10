@@ -1,38 +1,145 @@
 package com.example.dokumin.ui.document
 
+import android.net.Uri
 import android.os.Bundle
-import android.widget.Adapter
+import android.provider.OpenableColumns
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.dokumin.R
+import com.example.dokumin.data.model.responses.folder.Folder
+import com.example.dokumin.data.repositories.FolderRepository
+import com.example.dokumin.databinding.ActivityAddNewDocumentBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class AddNewDocumentActivity : AppCompatActivity() {
+    private var binding: ActivityAddNewDocumentBinding? = null
+    var listAdapter: ArrayAdapter<Folder>? = null
+
+    companion object {
+        private const val PICK_DOCUMENT_REQUEST_CODE = 1001
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_add_new_document)
-        val items = listOf("Folder 1", "Folder 2", "Folder 3")
-        val autoComplete : AutoCompleteTextView = findViewById(R.id.auto_complete)
-        val adapter = ArrayAdapter(this, R.layout.item_dropdown_folder,items)
-        autoComplete.setAdapter(adapter)
-        autoComplete.onItemClickListener = AdapterView.OnItemClickListener {
-           adapterView, view, i, l ->
+        binding = ActivityAddNewDocumentBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
+        FolderRepository.getFolders()
+        FolderRepository.selectedFolder = null
 
-            val itemSelected = adapterView.getItemAtPosition(i)
-            FancyToast.makeText(
-                this,
-                "Item selected: $itemSelected",
-                FancyToast.LENGTH_SHORT,
-                FancyToast.SUCCESS,
-                true
-            ).show()
+        listAdapter = ArrayAdapter(this, R.layout.item_dropdown_folder)
+        binding?.autoComplete?.apply {
+            setAdapter(listAdapter)
+            onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                val itemSelected = adapterView.getItemAtPosition(i)
+                FolderRepository.selectedFolder = itemSelected as Folder?
+            }
+        }
+        observeFolder()
 
+        binding?.btnSelectDocument?.setOnClickListener {
+            documentPickerLauncher.launch(arrayOf("*/*"))
+        }
+
+        binding?.btnSubmitDocument?.setOnClickListener {
+            //check if folder is selected
+            if (FolderRepository.selectedFolder == null) {
+                FancyToast.makeText(
+                    this@AddNewDocumentActivity,
+                    "Please select a folder",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                )
+                return@setOnClickListener
+            }
+
+            FolderRepository.postDocumentToFolder(
+                context = this@AddNewDocumentActivity,
+                uri = selectedDocumentUri ?: return@setOnClickListener,
+            )
+        }
+
+        observeUploadDocument()
+    }
+
+    private var selectedDocumentUri: Uri? = null
+    private var selectedDocumentName: String? = null
+
+    private val documentPickerLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            selectedDocumentUri = uri
+            selectedDocumentName = getFileName(uri)
+
+            // Display selected document name
+            binding?.tvSelectedDocumet?.text = selectedDocumentName ?: "No file selected"
+        } else {
+            binding?.tvSelectedDocumet?.text = "No file selected"
+        }
+    }
+
+//    private fun openDocumentPicker() {
+//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+//            addCategory(Intent.CATEGORY_OPENABLE)
+//            type = "*/*" // Allow all document types
+//        }
+//        startActivityForResult(intent, PICK_DOCUMENT_REQUEST_CODE)
+//    }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == PICK_DOCUMENT_REQUEST_CODE && resultCode == RESULT_OK) {
+//            selectedDocumentUri = data?.data
+//            selectedDocumentName = selectedDocumentUri?.let { getFileName(it) }
+//
+//            // Display selected document name
+//            binding?.tvSelectedDocumet?.text = selectedDocumentName ?: "No file selected"
+//        }
+//    }
+
+    private fun getFileName(uri: Uri): String? {
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        return cursor?.use {
+            if (it.moveToFirst()) {
+                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (nameIndex != -1) it.getString(nameIndex) else null
+            } else null
+        }
+    }
+
+
+    private fun observeFolder() {
+        FolderRepository.folderList.observe(this@AddNewDocumentActivity) { it ->
+            listAdapter?.clear()
+            listAdapter?.addAll(it?.folders ?: emptyList())
+        }
+    }
+
+    private fun observeUploadDocument() {
+        FolderRepository.postDocumentToFolderResponse.observe(this@AddNewDocumentActivity) { it ->
+            if (it?.success == true) {
+                FancyToast.makeText(
+                    this@AddNewDocumentActivity,
+                    "Document uploaded successfully",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.SUCCESS,
+                    false
+                )
+                finish()
+            } else {
+                FancyToast.makeText(
+                    this@AddNewDocumentActivity,
+                    "Failed to upload document",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                )
+            }
         }
     }
 }

@@ -22,8 +22,8 @@ object FolderRepository {
     val countFolder: LiveData<CountFolderResponse?> = _countFolder
 
     var selectedFolder: Folder? = null
-    private val _uploadDocumentToFolder: MutableLiveData<UploadDocumentModel?> = MutableLiveData()
-    val uploadDocumentToFolder: LiveData<UploadDocumentModel?> = _uploadDocumentToFolder
+    private val _postDocumentToFolderResponse: MutableLiveData<UploadDocumentModel?> = MutableLiveData()
+    val postDocumentToFolderResponse: LiveData<UploadDocumentModel?> = _postDocumentToFolderResponse
 
     fun getFolders(){
         FolderRemoteDataSource.getFolders(
@@ -57,7 +57,7 @@ object FolderRepository {
             filename = uri.lastPathSegment.toString(),
             onResult = { result ->
                 if (result.isSuccess){
-                    _uploadDocumentToFolder.value = result.getOrNull()
+                    _postDocumentToFolderResponse.value = result.getOrNull()
                 }else{
                     _errorMessage.value = result.exceptionOrNull()?.message
                 }
