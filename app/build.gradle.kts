@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.tensorflow.lite.support)
     implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.androidx.camera.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,7 +67,7 @@ dependencies {
 
     // Glide dependencies
     implementation("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // For Glide compiler
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
     // Retrofit dependencies
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -81,4 +82,9 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     implementation ("io.github.shashank02051997:FancyToast:2.0.2")
+
+    //tensor
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
 }
