@@ -1,37 +1,33 @@
 package com.example.dokumin.ui.folder.addFolder
 
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.dokumin.R
 import com.example.dokumin.data.repositories.FolderRepository
-import com.google.android.material.button.MaterialButton
+import com.example.dokumin.databinding.ActivityAddFolderBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class AddFolderActivity : AppCompatActivity() {
 
-    private lateinit var etFolderName: EditText
-    private lateinit var btnSave: MaterialButton
+    private lateinit var binding: ActivityAddFolderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_add_folder)
 
-        etFolderName = findViewById(R.id.etEmail)
-        btnSave = findViewById(R.id.signInBtn)
+        binding = ActivityAddFolderBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnSave.setOnClickListener {
-            val folderName = etFolderName.text.toString()
+        binding.btnSaveFolder.setOnClickListener {
+            val folderName = binding.etFolderName.text.toString()
             if (folderName.isBlank()) {
                 FancyToast.makeText(
                     this@AddFolderActivity,
                     "empty field",
                     FancyToast.LENGTH_SHORT,
-                    FancyToast.SUCCESS,
+                    FancyToast.WARNING,
                     false
                 ).show()
             } else {

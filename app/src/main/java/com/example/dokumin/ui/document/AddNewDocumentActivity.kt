@@ -41,7 +41,6 @@ class AddNewDocumentActivity : AppCompatActivity() {
         }
 
         binding?.btnSubmitDocument?.setOnClickListener {
-            //check if folder is selected
             if (FolderRepository.selectedFolder == null) {
                 FancyToast.makeText(
                     this@AddNewDocumentActivity,
@@ -74,7 +73,6 @@ class AddNewDocumentActivity : AppCompatActivity() {
                 filename = selectedDocumentName ?: return@setOnClickListener
             )
         }
-
         observeUploadDocument()
     }
 
@@ -87,8 +85,6 @@ class AddNewDocumentActivity : AppCompatActivity() {
         if (uri != null) {
             selectedDocumentUri = uri
             selectedDocumentName = getFileName(uri)
-
-            // Display selected document name
             binding?.tvSelectedDocumet?.text = selectedDocumentName ?: "No file selected"
         } else {
             binding?.tvSelectedDocumet?.text = "No file selected"
@@ -135,8 +131,5 @@ class AddNewDocumentActivity : AppCompatActivity() {
                 false
             ).show()
         }
-
     }
-
-
 }
