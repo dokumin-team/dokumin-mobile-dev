@@ -16,9 +16,11 @@ navigationUiKtx = "2.8.4"
 tensorflowLiteSupport = "0.1.0"
 tensorflowLiteMetadata = "0.1.0"
 cameraCore = "1.4.0"
+mlkit = "17.0.3"
 
 
 [libraries]
+mlkit.barcode.scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
