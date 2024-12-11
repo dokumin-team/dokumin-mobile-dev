@@ -90,6 +90,6 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
 
     //ml kit
-    implementation("com.google.mlkit:barcode-scanning:16.0.0")
+    implementation("com.google.mlkit:barcode-scanning:17.0.0")
 
 }

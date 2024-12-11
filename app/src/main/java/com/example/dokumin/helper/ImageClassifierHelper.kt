@@ -17,33 +17,26 @@ class ImageClassifierHelper(
     fun classifyImage(bitmap: Bitmap) {
         val model = QrcodeModel.newInstance(context)
 
-        // Proses gambar menjadi input untuk model
         val imageProcessor = ImageProcessor.Builder()
-            .add(ResizeOp(128, 128, ResizeOp.ResizeMethod.BILINEAR)) // Ukuran input model
+            .add(ResizeOp(128, 128, ResizeOp.ResizeMethod.BILINEAR))
             .build()
 
-        // Konversi bitmap menjadi RGB
         val tensorImage = TensorImage(DataType.FLOAT32)
-        tensorImage.load(bitmap) // Pastikan ini memuat gambar RGB
+        tensorImage.load(bitmap)
         val processedImage = imageProcessor.process(tensorImage)
         val byteBuffer = processedImage.buffer
 
-        // Siapkan input tensor
         val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 128, 128, 3), DataType.FLOAT32)
         inputFeature0.loadBuffer(byteBuffer)
 
-        // Waktu inferensi
         val inferenceTime = SystemClock.uptimeMillis()
         val outputs = model.process(inputFeature0)
         val inferenceDuration = SystemClock.uptimeMillis() - inferenceTime
 
-        // Ambil output
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
-        // Callback ke listener
         classifierListener?.onResults(outputFeature0.floatArray.toList(), inferenceDuration)
 
-        // Bersihkan resource model
         model.close()
     }
 
