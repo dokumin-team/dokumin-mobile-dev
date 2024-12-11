@@ -10,6 +10,7 @@ import com.example.dokumin.data.model.responses.auth.VerifyOtpModel
 import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.ListDocumentModel
 import com.example.dokumin.data.model.responses.folder.CountFolderResponse
+import com.example.dokumin.data.model.responses.folder.CreateFolderModel
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import com.example.dokumin.data.model.responses.folder.UploadDocumentModel
 import okhttp3.MultipartBody
@@ -64,6 +65,12 @@ interface ApiService {
         @Part("fileName") filename: String,
         @Part file: MultipartBody.Part?
     ): Call<UploadDocumentModel?>
+
+    @POST("folders/create")
+    fun postFolder(
+        @Header("Authorization") auth: String,
+        @Body body: Map<String, String>
+    ): Call<CreateFolderModel>
 
     // DOCUMENTS
     @GET("documents/list")

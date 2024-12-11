@@ -3,6 +3,7 @@ package com.example.dokumin.data.source.remote.datasource
 import android.content.Context
 import android.net.Uri
 import com.example.dokumin.data.model.responses.folder.CountFolderResponse
+import com.example.dokumin.data.model.responses.folder.CreateFolderModel
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import com.example.dokumin.data.model.responses.folder.UploadDocumentModel
 import com.example.dokumin.data.source.remote.RetrofitConfig
@@ -146,4 +147,42 @@ object FolderRemoteDataSource {
         return MultipartBody.Part.createFormData(partname, filename, requestBody)
     }
 
+
+    fun postFolder(
+        folderName: String,
+        onResult: (Result<CreateFolderModel?>) -> Unit
+    ) {
+        val body = mapOf("folderName" to folderName)
+        val call = RetrofitConfig.ApiService.postFolder(
+            "Bearer ${RetrofitConfig.token}",
+            body
+        )
+        call.enqueue(object : Callback<CreateFolderModel?> {
+            override fun onResponse(
+                call: Call<CreateFolderModel?>,
+                response: Response<CreateFolderModel?>
+            ) {
+                if (response.isSuccessful) {
+                    onResult(Result.success(response.body()))
+                } else {
+                    val errorJsonString = response.errorBody()?.string()
+                    val message = try {
+                        val jsonObject = JSONObject(errorJsonString.toString())
+                        jsonObject.optString("message", "Unknown error")
+                    } catch (e: Exception) {
+                        "Error parsing response: ${e.message}"
+                    }
+                    onResult(Result.failure(Throwable(message)))
+                }
+            }
+
+            override fun onFailure(call: Call<CreateFolderModel?>, t: Throwable) {
+                onResult(Result.failure(t))
+            }
+        })
+    }
+
 }
+
+
+

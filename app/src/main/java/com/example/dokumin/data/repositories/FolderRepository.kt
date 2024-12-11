@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dokumin.data.model.responses.folder.CountFolderResponse
+import com.example.dokumin.data.model.responses.folder.CreateFolderModel
 import com.example.dokumin.data.model.responses.folder.Folder
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
 import com.example.dokumin.data.model.responses.folder.UploadDocumentModel
@@ -24,6 +25,9 @@ object FolderRepository {
     var selectedFolder: Folder? = null
     private val _postDocumentToFolderResponse: MutableLiveData<UploadDocumentModel?> = MutableLiveData()
     val postDocumentToFolderResponse: LiveData<UploadDocumentModel?> = _postDocumentToFolderResponse
+
+    private val _createFolderResponse: MutableLiveData<CreateFolderModel?> = MutableLiveData()
+    val createFolderResponse: LiveData<CreateFolderModel?> = _createFolderResponse
 
     fun getFolders(){
         FolderRemoteDataSource.getFolders(
@@ -65,6 +69,17 @@ object FolderRepository {
 
         )
     }
+
+    fun postFolder(folderName: String) {
+        FolderRemoteDataSource.postFolder(folderName) { result ->
+            if (result.isSuccess) {
+                _createFolderResponse.value = result.getOrNull()
+            } else {
+                _errorMessage.value = result.exceptionOrNull()?.message
+            }
+        }
+    }
+
 
 
 }
