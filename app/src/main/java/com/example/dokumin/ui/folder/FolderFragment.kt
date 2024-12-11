@@ -76,9 +76,17 @@ class FolderFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        FolderRepository.getFolders()
+    }
+
+
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
 
     }
+
+
 }
