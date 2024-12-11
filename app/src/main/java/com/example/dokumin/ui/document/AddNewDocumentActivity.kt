@@ -101,7 +101,6 @@ class AddNewDocumentActivity : AppCompatActivity() {
         }
     }
 
-
     private fun observeFolder() {
         FolderRepository.folderList.observe(this@AddNewDocumentActivity) { it ->
             listAdapter?.clear()

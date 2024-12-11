@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.dokumin">
+    package="com.example.dokumin" >
     <!-- Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -26,7 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".ui.home.QrCodeActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.folder.addFolder.AddFolderActivity"
             android:exported="false" />
@@ -41,7 +44,7 @@
             android:exported="false" /> <!-- Main Activity with Intent Filter (Entry Point) -->
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,7 +60,7 @@
         <activity
             android:name=".ui.camera.ImagePreviewActivity"
             android:exported="false"
-            tools:ignore="AppLinkUrlError">
+            tools:ignore="AppLinkUrlError" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

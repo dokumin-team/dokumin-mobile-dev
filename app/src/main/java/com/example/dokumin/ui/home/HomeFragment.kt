@@ -1,14 +1,22 @@
 package com.example.dokumin.ui.home
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dokumin.adapter.DocumentAdapter
@@ -21,6 +29,7 @@ import com.example.dokumin.data.repositories.FolderRepository
 import com.example.dokumin.data.repositories.FolderRepository.countFolder
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.databinding.FragmentHomeBinding
+import com.example.dokumin.ui.camera.ImagePreviewActivity
 import com.example.dokumin.ui.document.DocumentDetailActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 
@@ -31,20 +40,25 @@ class HomeFragment : Fragment() {
     private val appPreferences by lazy {
         AppPreferences(requireContext())
     }
+
+    private val CAMERA_REQUEST_CODE = 100
+    private val GALLERY_REQUEST_CODE = 200
+    private var photoUri: Uri? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         return binding?.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Setting up the welcome text with bold styling
 
         val fullText = "Welcome ${appPreferences.getUserName()}\nto Dokumin"
         val spannable = SpannableString(fullText)
@@ -75,6 +89,10 @@ class HomeFragment : Fragment() {
         observeListDocument()
         observeCountDocument()
         observeCountFolder()
+
+        binding?.scanQr?.setOnClickListener {
+            showImagePickerDialog()
+        }
     }
 
     private fun observeCountFolder() {
@@ -147,6 +165,54 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun showImagePickerDialog() {
+        val options = arrayOf("Camera", "Gallery")
+        AlertDialog.Builder(requireContext())
+            .setTitle("Choose an option")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> openCamera()
+                    1 -> openGallery()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                CAMERA_REQUEST_CODE -> {
+                    val photoUri = data?.data
+                    openImageActivity(photoUri)
+                }
+                GALLERY_REQUEST_CODE -> {
+                    val selectedImageUri = data?.data
+                    openImageActivity(selectedImageUri)
+                }
+            }
+        }
+    }
+
+    private fun openImageActivity(imageUri: Uri?) {
+        val intent = Intent(requireContext(), QrCodeActivity::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable("imageUri", imageUri)
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
 
 
     override fun onDestroyView() {
