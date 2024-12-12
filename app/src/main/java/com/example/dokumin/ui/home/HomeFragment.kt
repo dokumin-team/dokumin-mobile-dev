@@ -170,17 +170,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showImagePickerDialog(isForQrCode: Boolean) {
-        val options = arrayOf("Camera", "Gallery")
-        AlertDialog.Builder(requireContext())
-            .setTitle("Choose an option")
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> openCamera(isForQrCode)
-                    1 -> openGallery(isForQrCode)
-                }
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
+        openGallery(isForQrCode)
     }
 
     private fun openCamera(isForQrCode: Boolean) {
