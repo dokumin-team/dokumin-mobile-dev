@@ -1,5 +1,6 @@
 package com.example.dokumin.ui.camera
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -17,16 +18,26 @@ class ImagePreviewActivity : AppCompatActivity() {
         val imageView = binding?.imageView
 
         val imageUri: Uri? = intent.getParcelableExtra("imageUri")
+        val imagePath: String? = intent.getStringExtra("imagePath")
         val imageSource = intent.getStringExtra("imageSource")
 
-        imageUri?.let { image ->
-            imageSource?.let { source ->
-                if (source == "camera") {
-                    imageView?.setImageURI(image)
-                } else {
+
+        imageSource?.let { source ->
+            if (source == "camera") {
+                imagePath?.let { image ->
+                    val result = BitmapFactory.decodeFile(image)
+                    imageView?.setImageBitmap(result)
+
+                } ?: run {
+                    Toast.makeText(this, "No image to display", Toast.LENGTH_SHORT).show()
+                }
+
+            } else {
+                imageUri?.let { image ->
                     imageView?.setImageURI(image)
                 }
             }
+
 //            imageView?.setImageURI(it)
         } ?: run {
             Toast.makeText(this, "No image to display", Toast.LENGTH_SHORT).show()

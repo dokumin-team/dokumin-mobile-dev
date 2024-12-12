@@ -85,12 +85,10 @@ class CameraFragment : Fragment() {
 
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        intent.resolveActivity(packageManager)
-
         createTempFile(requireContext()).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 requireActivity(),
-                "com.asthiseta.submissionintermediate",
+                "com.example.dokumin",
                 it
             )
             currentPath = it.absolutePath
@@ -134,6 +132,11 @@ class CameraFragment : Fragment() {
             getFile = myFile
 
             // TODO MOve To ImagePreviewActivity
+            val result = getFile?.path
+            val intent = Intent(requireContext(), ImagePreviewActivity::class.java)
+            intent.putExtra("imagePath", result)
+            intent.putExtra("imageSource", "camera")
+            startActivity(intent)
 //            val result = BitmapFactory.decodeFile(getFile?.path)
 //            binding.imageViewPreview.setImageBitmap(result)
         }
