@@ -1,5 +1,8 @@
 package com.example.dokumin.ui.home
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -40,6 +43,21 @@ class QrCodeActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierList
                 processAndClassifyImage(uri)
             }
         }
+
+        binding.ivCopyIcon.setOnClickListener {
+            copyTextToClipboard(binding.tvQrCodeResult.text.toString())
+        }
+    }
+
+    private fun copyTextToClipboard(text: String) {
+        if (text.isNotEmpty()) {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("QR Code Result", text)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, "Teks berhasil disalin ke clipboard", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Tidak ada teks untuk disalin", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun displayImageFromUri(uri: Uri) {
@@ -75,7 +93,7 @@ class QrCodeActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierList
                 FancyToast.LENGTH_LONG,
                 FancyToast.SUCCESS,
                 false
-            ).show();
+            ).show()
         }
     }
 
@@ -88,7 +106,13 @@ class QrCodeActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierList
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to scan QR code: ${e.message}", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(
+                    this,
+                    "Failed to scan QR code",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    false
+                ).show()
             }
     }
 
@@ -96,7 +120,6 @@ class QrCodeActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierList
         val value = barcode.displayValue
         if (value != null) {
             binding.tvQrCodeResult.text = "QR Code Data: $value"
-
         }
     }
 }
