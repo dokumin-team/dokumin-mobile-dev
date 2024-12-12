@@ -1,14 +1,11 @@
 package com.example.dokumin.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dokumin.R
-import com.example.dokumin.adapter.FolderAdapter.FolderViewHolder
 import com.example.dokumin.data.model.responses.document.Document
 import com.example.dokumin.databinding.ItemDocumentBinding
-import com.example.dokumin.databinding.ItemFolderBinding
 
 class DocumentAdapter(
     val onDocument: (document: Document?) -> Unit
@@ -25,6 +22,10 @@ class DocumentAdapter(
         fun bind(itemDocument: Document?) {
             binding.imgItemPhotoDocs.setImageResource(R.drawable.docs)
             binding.tvDocumentName.text = itemDocument?.fileName
+            binding?.dateTextView?.text =
+                itemDocument?.createdAt?.getCreatedAtFormatted()?.split(" ")?.get(0)
+            binding?.timeTextView?.text =
+                itemDocument?.createdAt?.getCreatedAtFormatted()?.split(" ")?.get(1)
             binding.root.setOnClickListener {
                 onDocument(itemDocument)
             }
