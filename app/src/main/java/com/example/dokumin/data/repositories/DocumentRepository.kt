@@ -1,10 +1,13 @@
 package com.example.dokumin.data.repositories
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.DocType
 import com.example.dokumin.data.model.responses.document.Document
+import com.example.dokumin.data.model.responses.document.ScanDocumentResponse
 import com.example.dokumin.data.source.remote.datasource.DocumentRemoteDataSource
 
 object DocumentRepository {
@@ -22,10 +25,13 @@ object DocumentRepository {
     val countDocument: LiveData<CountDocumentResponse?> = _countDocument
 
     var selectedDocument: Document? = null
-    var selectedDocType : DocType? = null
+    var selectedDocType: DocType? = null
 
     private val _documentFolderList: MutableLiveData<List<Document>> = MutableLiveData()
     val documentFolderList: LiveData<List<Document>> = _documentFolderList
+
+    private val _scanDocumentResponse: MutableLiveData<ScanDocumentResponse?> = MutableLiveData()
+    val scanDocumentResponse: LiveData<ScanDocumentResponse?> = _scanDocumentResponse
 
     fun getDocuments() {
         DocumentRemoteDataSource.getDocument(
@@ -64,15 +70,38 @@ object DocumentRepository {
     }
 
     fun getDocumentsByFolder(folderId: String?) {
-        DocumentRemoteDataSource.getDocumentByFolder(folderId){ it ->
-            if (it.isSuccess){
+        DocumentRemoteDataSource.getDocumentByFolder(folderId) { it ->
+            if (it.isSuccess) {
                 _documentFolderList.value = it.getOrNull()?.documents
-            }else{
+            } else {
                 _errorMessage.value = it.exceptionOrNull()?.message
             }
         }
-
     }
 
+    fun postScannedDocument(uri: Uri, context: Context, filename: String) {
+        DocumentRemoteDataSource.postScannedDocument(
+            uri,
+            context = context,
+            filename = filename,
+        ) { result ->
+            if (result.isSuccess) {
+                _scanDocumentResponse.value = result.getOrNull()
+            } else {
+                _errorMessage.value = result.exceptionOrNull()?.message
+            }
+        }
+    }
+
+    fun clearState() {
+        _errorMessage.value = null
+        _documentList.value = emptyList()
+        _newestDocumentList.value = emptyList()
+        _countDocument.value = null
+        _documentFolderList.value = emptyList()
+        _scanDocumentResponse.value = null
+        selectedDocument = null
+
+    }
 
 }

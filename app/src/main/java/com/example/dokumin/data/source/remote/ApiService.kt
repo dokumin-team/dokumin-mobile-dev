@@ -9,6 +9,7 @@ import com.example.dokumin.data.model.responses.auth.SignupModel
 import com.example.dokumin.data.model.responses.auth.VerifyOtpModel
 import com.example.dokumin.data.model.responses.document.CountDocumentResponse
 import com.example.dokumin.data.model.responses.document.ListDocumentModel
+import com.example.dokumin.data.model.responses.document.ScanDocumentResponse
 import com.example.dokumin.data.model.responses.folder.CountFolderResponse
 import com.example.dokumin.data.model.responses.folder.CreateFolderModel
 import com.example.dokumin.data.model.responses.folder.ListFolderModel
@@ -98,6 +99,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("folderId") folderId: String
     ):Call<ListDocumentModel?>
+
+    @Multipart
+    @POST("model/scan")
+    fun postScannedDocument(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part?
+    ): Call<ScanDocumentResponse?>
 
 
 
