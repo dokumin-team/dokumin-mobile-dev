@@ -80,6 +80,14 @@ object FolderRepository {
         }
     }
 
+    fun clearState(){
+        _errorMessage.value = null
+        _folderList.value = null
+        _countFolder.value = null
+        _postDocumentToFolderResponse.value = null
+        _createFolderResponse.value = null
+    }
+
 
 
 }

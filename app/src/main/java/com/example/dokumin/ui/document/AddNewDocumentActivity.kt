@@ -131,4 +131,10 @@ class AddNewDocumentActivity : AppCompatActivity() {
             ).show()
         }
     }
+
+    override fun onDestroy() {
+        binding = null
+        FolderRepository.clearState();
+        super.onDestroy()
+    }
 }
