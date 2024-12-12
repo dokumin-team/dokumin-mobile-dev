@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dokumin.R
 import com.example.dokumin.databinding.ActivityQrCodeBinding
 import com.example.dokumin.helper.ImageClassifierHelper
-import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.shashank.sony.fancytoastlib.FancyToast
 
