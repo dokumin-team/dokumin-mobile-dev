@@ -86,6 +86,7 @@ class DocumentFragment : Fragment() {
             documentAdapter?.setList(it ?: emptyList())
         }
         DocumentRepository.errorMessage.observe(viewLifecycleOwner) { error ->
+            if (error == null) return@observe
             error?.let {
                 FancyToast.makeText(
                     requireContext(),
