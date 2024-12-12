@@ -1,7 +1,6 @@
 package com.example.dokumin.ui.camera
 
 import android.Manifest
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
@@ -105,7 +104,7 @@ class CameraFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             val imageUri: Uri? = data?.data
 
             if (requestCode == GALLERY_REQUEST_CODE) {
@@ -131,14 +130,12 @@ class CameraFragment : Fragment() {
             val myFile = File(currentPath)
             getFile = myFile
 
-            // TODO MOve To ImagePreviewActivity
+
             val result = getFile?.path
             val intent = Intent(requireContext(), ImagePreviewActivity::class.java)
             intent.putExtra("imagePath", result)
             intent.putExtra("imageSource", "camera")
             startActivity(intent)
-//            val result = BitmapFactory.decodeFile(getFile?.path)
-//            binding.imageViewPreview.setImageBitmap(result)
         }
     }
 

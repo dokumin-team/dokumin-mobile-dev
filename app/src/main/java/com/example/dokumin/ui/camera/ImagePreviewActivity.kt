@@ -3,6 +3,7 @@ package com.example.dokumin.ui.camera
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dokumin.data.repositories.DocumentRepository
@@ -50,17 +51,28 @@ class ImagePreviewActivity : AppCompatActivity() {
 
         binding?.btnUploadDocument?.setOnClickListener {
             imageUri?.let {
+
+                val filePath = imageUri?.path
+                // Get the filename
+                val filename = filePath?.substring(filePath.lastIndexOf("/") + 1) ?: "unknown_file"
+
+                // Use ContentResolver to get the MIME type and derive the extension
+                val mimeType = contentResolver.getType(imageUri!!) ?: "application/octet-stream"
+                val extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType) ?: "unknown"
+
+                // Append the extension to the filename if necessary
+                val fullFilename = if (filename?.contains('.') == true) filename else "$filename.$extension"
+
                 DocumentRepository.postScannedDocument(
                     uri = it,
                     context = this@ImagePreviewActivity,
-                    filename = imageUri?.pathSegments?.last().toString()
+                    filename = fullFilename
                 )
                 return@setOnClickListener
             }
 
             imagePath?.let {
-
-                val uri =Uri.fromFile( File(it))
+                val uri = Uri.fromFile(File(it))
                 DocumentRepository.postScannedDocument(
                     uri = uri,
                     context = this@ImagePreviewActivity,
