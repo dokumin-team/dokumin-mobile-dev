@@ -122,6 +122,7 @@ class AddNewDocumentActivity : AppCompatActivity() {
             }
         }
         FolderRepository.errorMessage.observe(this@AddNewDocumentActivity) { it ->
+            if (it == null) return@observe
             FancyToast.makeText(
                 this@AddNewDocumentActivity,
                 "Failed to upload document ${it ?: ""}",
