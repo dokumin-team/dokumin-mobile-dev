@@ -1,9 +1,13 @@
 package com.example.dokumin.ui.home
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dokumin.databinding.ActivityOcrBinding
 import com.google.mlkit.vision.common.InputImage
@@ -39,6 +43,7 @@ class OcrActivity : AppCompatActivity() {
     }
 
     private fun performOcr(uri: Uri) {
+        binding.ivCopyOcrResult.visibility = View.GONE
         try {
             val imageStream = contentResolver.openInputStream(uri)
             val bitmap = BitmapFactory.decodeStream(imageStream)
@@ -59,10 +64,23 @@ class OcrActivity : AppCompatActivity() {
         }
     }
 
+    private fun copyTextOcr() {
+        val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("OCR Result", resultTextOCR)
+        clipboard.setPrimaryClip(clip)
+        Toast.makeText(this, "Text copied to clipboard", Toast.LENGTH_SHORT).show()
+    }
+
+    private var resultTextOCR = ""
+
     private fun processDetectedText(visionText: Text) {
-        val resultText = visionText.text
-        if (resultText.isNotEmpty()) {
-            binding.tvOcrResult.text = resultText
+         resultTextOCR = visionText.text
+        if (resultTextOCR.isNotEmpty()) {
+            binding.tvOcrResult.text = resultTextOCR
+            binding.ivCopyOcrResult.visibility = View.VISIBLE
+            binding.ivCopyOcrResult.setOnClickListener {
+                copyTextOcr()
+            }
         } else {
             binding.tvOcrResult.text = "No text detected"
         }

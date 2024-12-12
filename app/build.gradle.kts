@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.androidx.camera.core)
     implementation(libs.play.services.mlkit.text.recognition)
+    implementation(libs.vision.common)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

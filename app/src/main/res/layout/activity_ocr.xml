@@ -35,20 +35,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Button for triggering OCR analysis -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAnalyzeOcr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/llAnalyzeOcr"
         android:layout_marginTop="30dp"
-        android:text="@string/analyze"
-        style="@style/ShapeAppearanceOverlay.Material3.Button"
-        app:cornerRadius="12dp"
-        android:backgroundTint="@color/ocean_blue"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/tvResult"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+
+        android:layout_height="wrap_content">
+
+        <!-- Button for triggering OCR analysis -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAnalyzeOcr"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/analyze"
+            style="@style/ShapeAppearanceOverlay.Material3.Button"
+            app:cornerRadius="12dp"
+            android:backgroundTint="@color/ocean_blue"
+            />
+
+        <!-- Button for copying OCR result to clipboard -->
+        <ImageView
+            android:layout_marginHorizontal="12dp"
+            android:id="@+id/ivCopyOcrResult"
+            android:src="@drawable/ic_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tint="@color/ocean_blue" />
+
+
+    </LinearLayout>
 
     <!-- TextView to display the OCR result -->
     <TextView
@@ -61,7 +82,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
-        app:layout_constraintTop_toBottomOf="@id/btnAnalyzeOcr"
+        app:layout_constraintTop_toBottomOf="@id/llAnalyzeOcr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
