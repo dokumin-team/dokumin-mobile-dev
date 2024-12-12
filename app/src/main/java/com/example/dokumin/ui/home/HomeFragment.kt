@@ -56,7 +56,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -90,8 +89,13 @@ class HomeFragment : Fragment() {
         observeCountDocument()
         observeCountFolder()
 
+
         binding?.scanQr?.setOnClickListener {
-            showImagePickerDialog()
+            showImagePickerDialog(isForQrCode = true)
+        }
+
+        binding?.scanOcr?.setOnClickListener {
+            showImagePickerDialog(isForQrCode = false)
         }
     }
 
@@ -131,7 +135,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Navigate to DocumentDetailActivity if the file type is supported
         if(DocumentRepository.selectedDocType != DocType.UNKNOWN){
             val intent = Intent(requireActivity(), DocumentDetailActivity::class.java)
             startActivity(intent)
@@ -165,28 +168,30 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showImagePickerDialog() {
+    private fun showImagePickerDialog(isForQrCode: Boolean) {
         val options = arrayOf("Camera", "Gallery")
         AlertDialog.Builder(requireContext())
             .setTitle("Choose an option")
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> openCamera()
-                    1 -> openGallery()
+                    0 -> openCamera(isForQrCode)
+                    1 -> openGallery(isForQrCode)
                 }
             }
             .setNegativeButton("Cancel", null)
             .show()
     }
 
-    private fun openCamera() {
+    private fun openCamera(isForQrCode: Boolean) {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
+        val requestCode = if (isForQrCode) CAMERA_REQUEST_CODE else CAMERA_REQUEST_CODE + 1
+        startActivityForResult(cameraIntent, requestCode)
     }
 
-    private fun openGallery() {
+    private fun openGallery(isForQrCode: Boolean) {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+        val requestCode = if (isForQrCode) GALLERY_REQUEST_CODE else GALLERY_REQUEST_CODE + 1
+        startActivityForResult(galleryIntent, requestCode)
     }
 
     @Deprecated("Deprecated in Java")
@@ -194,20 +199,23 @@ class HomeFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                CAMERA_REQUEST_CODE -> {
-                    val photoUri = data?.data
-                    openImageActivity(photoUri)
+                CAMERA_REQUEST_CODE, GALLERY_REQUEST_CODE -> {
+                    val imageUri = data?.data
+                    openImageActivity(imageUri, isForQrCode = true)
                 }
-                GALLERY_REQUEST_CODE -> {
-                    val selectedImageUri = data?.data
-                    openImageActivity(selectedImageUri)
+                CAMERA_REQUEST_CODE + 1, GALLERY_REQUEST_CODE + 1 -> {
+                    val imageUri = data?.data
+                    openImageActivity(imageUri, isForQrCode = false)
                 }
             }
         }
     }
 
-    private fun openImageActivity(imageUri: Uri?) {
-        val intent = Intent(requireContext(), QrCodeActivity::class.java)
+    private fun openImageActivity(imageUri: Uri?, isForQrCode: Boolean) {
+        val intent = Intent(
+            requireContext(),
+            if (isForQrCode) QrCodeActivity::class.java else OcrActivity::class.java
+        )
         val bundle = Bundle()
         bundle.putParcelable("imageUri", imageUri)
         intent.putExtras(bundle)

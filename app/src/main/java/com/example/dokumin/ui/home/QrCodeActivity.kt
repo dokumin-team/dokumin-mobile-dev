@@ -28,7 +28,7 @@ class QrCodeActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierList
         setContentView(binding.root)
 
         classifierHelper = ImageClassifierHelper(this, this)
-        barcodeScanner = BarcodeScanning.getClient() // Initialize ML Kit's barcode scanner
+        barcodeScanner = BarcodeScanning.getClient()
 
         val imageUri = intent.extras?.getParcelable<Uri>("imageUri")
         imageUri?.let { uri ->
