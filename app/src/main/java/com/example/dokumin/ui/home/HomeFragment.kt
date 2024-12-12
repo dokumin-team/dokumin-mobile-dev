@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fullText = "Welcome ${appPreferences.getUserName()}\nto Dokumin"
+        val fullText = "Welcome ${appPreferences.getUserName().split(" ").first()}\nto Dokumin"
         val spannable = SpannableString(fullText)
 
         spannable.setSpan(
