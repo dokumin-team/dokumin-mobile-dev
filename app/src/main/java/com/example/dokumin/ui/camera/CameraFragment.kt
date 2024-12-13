@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,7 @@ class CameraFragment : Fragment() {
         }
 
         galleryBtn.setOnClickListener {
-            openGallery()
+            openGalleryMenu()
         }
     }
 
@@ -82,21 +83,26 @@ class CameraFragment : Fragment() {
     ).format(System.currentTimeMillis())
 
 
-    private fun openCamera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        createTempFile(requireContext()).also {
-            val photoURI: Uri = FileProvider.getUriForFile(
-                requireActivity(),
-                "com.example.dokumin",
-                it
-            )
-            currentPath = it.absolutePath
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-            cameraIntentLauncher.launch(intent)
+    fun openCamera() {
+        if (isAdded && context != null) {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            createTempFile(requireContext()).also {
+                val photoURI: Uri = FileProvider.getUriForFile(
+                    requireActivity(),
+                    "com.example.dokumin",
+                    it
+                )
+                currentPath = it.absolutePath
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                cameraIntentLauncher.launch(intent)
+            }
+        } else {
+            Log.e("CameraFragment", "Fragment is not attached to a context.")
         }
     }
 
-    private fun openGallery() {
+
+    fun openGalleryMenu() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
     }

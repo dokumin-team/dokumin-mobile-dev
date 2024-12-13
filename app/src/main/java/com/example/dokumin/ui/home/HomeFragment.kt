@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dokumin.R
 import com.example.dokumin.adapter.DocumentAdapter
 import com.example.dokumin.data.model.responses.document.DocType
 import com.example.dokumin.data.model.responses.document.Document
@@ -29,6 +30,7 @@ import com.example.dokumin.data.repositories.FolderRepository
 import com.example.dokumin.data.repositories.FolderRepository.countFolder
 import com.example.dokumin.data.source.preferences.AppPreferences
 import com.example.dokumin.databinding.FragmentHomeBinding
+import com.example.dokumin.ui.camera.CameraFragment
 import com.example.dokumin.ui.camera.ImagePreviewActivity
 import com.example.dokumin.ui.document.DocumentDetailActivity
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -97,6 +99,37 @@ class HomeFragment : Fragment() {
         binding?.scanOcr?.setOnClickListener {
             showImagePickerDialog(isForQrCode = false)
         }
+
+        binding?.btnCameraHome?.setOnClickListener {
+            val cameraFragment = CameraFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, cameraFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+            fragmentManager.executePendingTransactions()
+            if (cameraFragment.isAdded) {
+                cameraFragment.openCamera()
+            }
+
+        }
+        binding?.btnGaleryHome?.setOnClickListener {
+            val cameraFragment = CameraFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, cameraFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commitAllowingStateLoss()
+
+            fragmentManager.executePendingTransactions()
+            if (cameraFragment.isAdded) {
+                cameraFragment.openGalleryMenu()
+            }
+        }
+
     }
 
     private fun observeCountFolder() {
