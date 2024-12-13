@@ -5,61 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_margin="30dp"
+    android:padding="30dp"
     android:orientation="vertical"
     android:backgroundTint="@color/alice_blue"
     tools:context=".ui.folder.addFolder.AddFolderActivity">
 
     <TextView
-        android:id="@+id/tv_dokumen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_new_folder"
-        android:textFontWeight="700"
-        android:textSize="24sp"
-        android:layout_gravity="center"
-        android:textColor="@color/ocean_blue"
-        android:fontFamily="@font/poppins_extrabold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp" />
+    android:id="@+id/tv_dokumen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/create_new_folder"
+    android:textFontWeight="700"
+    android:textSize="24sp"
+    android:layout_gravity="center"
+    android:textColor="@color/ocean_blue"
+    android:fontFamily="@font/poppins_extrabold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="30dp" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@drawable/ic_add_folder" />
+    android:id="@+id/imageView6"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    app:srcCompat="@drawable/ic_add_folder" />
 
     <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:layout_marginTop="16dp"
+    android:radius="8dp"
+    android:backgroundTint="@android:color/white">
+
+    <EditText
+        android:id="@+id/etFolderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:layout_marginTop="16dp"
-        android:radius="8dp"
-        android:backgroundTint="@android:color/white">
-
-        <EditText
-            android:id="@+id/etFolderName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/folder_name"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:background="@android:color/white" />
+        android:hint="@string/folder_name"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:background="@android:color/white" />
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSaveFolder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        style="@style/ShapeAppearanceOverlay.Material3.Button"
-        app:cornerRadius="12dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="@color/ocean_blue" />
+    android:id="@+id/btnSaveFolder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/save"
+    style="@style/ShapeAppearanceOverlay.Material3.Button"
+    app:cornerRadius="12dp"
+    android:layout_marginTop="25dp"
+    android:backgroundTint="@color/ocean_blue" />
 
 </LinearLayout>
