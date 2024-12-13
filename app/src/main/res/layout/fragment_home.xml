@@ -88,7 +88,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:background="@drawable/background_search"
                 android:layout_marginEnd="2dp"
@@ -131,7 +131,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:background="@drawable/background_search"
                 android:paddingHorizontal="8dp"

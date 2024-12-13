@@ -66,7 +66,7 @@
     <string name="create_new_folder">Create New Folder</string>
     <string name="folder_name">Folder Name</string>
     <string name="jumlah_folder">Total Folders</string>
-    <string name="jumlah_dokumen">Total Documents</string>
+    <string name="jumlah_dokumen">Total Docs</string>
     <string name="analyze">Analyze</string>
     <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
     <string name="qr_code_result_will_appear_here_you_can_add_a_longer_text_here_to_see_the_scrolling_effect_in_action">QR Code Result will appear here. You can add a longer text here to see the scrolling effect in action.</string>

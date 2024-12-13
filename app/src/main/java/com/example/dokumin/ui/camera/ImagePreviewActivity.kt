@@ -92,7 +92,7 @@ class ImagePreviewActivity : AppCompatActivity() {
             if (it != null) {
                 FancyToast.makeText(
                     this,
-                    "Document has been scanned",
+                    "Document has been uploaded",
                     FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS,
                     false

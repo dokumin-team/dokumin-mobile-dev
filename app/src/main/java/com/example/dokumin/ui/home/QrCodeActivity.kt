@@ -89,7 +89,7 @@ class QrCodeActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierList
         } else {
             FancyToast.makeText(
                 this,
-                "This image is not a barcode",
+                "This image is not a QR code",
                 FancyToast.LENGTH_LONG,
                 FancyToast.SUCCESS,
                 false

@@ -1,6 +1,7 @@
 package com.example.dokumin.ui.profile
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +49,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val intent = Intent(requireContext(), AboutActivity::class.java)
             startActivity(intent)
         }
+
+        binding?.ContactUsMenu?.setOnClickListener {
+            val url = "http://www.instagram.com/dokumin.bangkit"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+
 
         // Logout dan kembali ke Login Activity
         binding?.logoutButton?.setOnClickListener {
