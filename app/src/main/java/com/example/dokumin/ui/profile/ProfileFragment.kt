@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dokumin.R
 import com.example.dokumin.data.source.preferences.AppPreferences
+import com.example.dokumin.data.source.remote.RetrofitConfig
 import com.example.dokumin.databinding.FragmentProfileBinding
 import com.example.dokumin.ui.about.AboutActivity
 import com.example.dokumin.ui.auth.signin.SignInActivity
@@ -51,6 +52,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         // Logout dan kembali ke Login Activity
         binding?.logoutButton?.setOnClickListener {
             appPreferences.deleteSession()
+            RetrofitConfig.token = ""
             val intent = Intent(requireContext(), SignInActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
