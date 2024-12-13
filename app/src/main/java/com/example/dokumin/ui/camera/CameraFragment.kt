@@ -1,6 +1,7 @@
 package com.example.dokumin.ui.camera
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
@@ -20,36 +21,37 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.dokumin.R
+import com.example.dokumin.databinding.FragmentCameraBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class CameraFragment : Fragment() {
 
-    private val CAMERA_REQUEST_CODE = 100
+    private lateinit var binding: FragmentCameraBinding
     private val GALLERY_REQUEST_CODE = 200
+    private lateinit var currentPath: String
+    private var getFile: File? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_camera, container, false)
+        binding = FragmentCameraBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cameraBtn = view.findViewById<ImageView>(R.id.cameraBtn)
-        val galleryBtn = view.findViewById<ImageView>(R.id.galleryBtn)
-
-
+        playAnimation()
         checkPermissions()
 
-        cameraBtn.setOnClickListener {
+        binding.cameraBtn.setOnClickListener {
             openCamera()
         }
 
-        galleryBtn.setOnClickListener {
+        binding.galleryBtn.setOnClickListener {
             openGalleryMenu()
         }
     }
@@ -67,12 +69,11 @@ class CameraFragment : Fragment() {
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
             ActivityCompat.requestPermissions(requireActivity(), permissions, 1)
         }
     }
 
-    fun createTempFile(context: Context): File {
+    private fun createTempFile(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
@@ -81,7 +82,6 @@ class CameraFragment : Fragment() {
         "dd-MMM-yyyy",
         Locale.getDefault()
     ).format(System.currentTimeMillis())
-
 
     fun openCamera() {
         if (isAdded && context != null) {
@@ -100,7 +100,6 @@ class CameraFragment : Fragment() {
             Log.e("CameraFragment", "Fragment is not attached to a context.")
         }
     }
-
 
     fun openGalleryMenu() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -121,13 +120,8 @@ class CameraFragment : Fragment() {
                     startActivity(intent)
                 }
             }
-
         }
     }
-
-
-    private lateinit var currentPath: String
-    private var getFile: File? = null
 
     private val cameraIntentLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -135,7 +129,6 @@ class CameraFragment : Fragment() {
         if (it.resultCode == RESULT_OK) {
             val myFile = File(currentPath)
             getFile = myFile
-
 
             val result = getFile?.path
             val intent = Intent(requireContext(), ImagePreviewActivity::class.java)
@@ -145,9 +138,11 @@ class CameraFragment : Fragment() {
         }
     }
 
-//        companion object {
-//            private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-//            private const val REQUEST_CODE_PERMISSIONS = 10
-//            const val MY_LOCATION_TO_SHARE = 11
-//        }
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.imageView5, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+    }
 }

@@ -1,31 +1,45 @@
 package com.example.dokumin.ui.welcome
 
-import android.annotation.SuppressLint
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.dokumin.R
+import com.example.dokumin.databinding.ActivityWelcome3Binding
 import com.example.dokumin.ui.auth.signin.SignInActivity
 
 class WelcomeActivity3 : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
+    private lateinit var binding: ActivityWelcome3Binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_welcome3)
-        findViewById<Button>(R.id.button3).setOnClickListener {
+        binding = ActivityWelcome3Binding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.button3.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+
+        playAnimation()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.imageView3, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
     }
 }
